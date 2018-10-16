@@ -1,0 +1,63 @@
+Methodology :
+
+Data Preprocessing :
+
+    1. Dealing with Missing Values :
+        Pair Wise deletion :
+            Pairwise deletion is a term used in relation to computer software programs such as SPSS in connection with the handling of missing data. Pairwise deletion of missing data means that only cases relating to each pair of variables with missing data .
+            Pros
+            Retains more data compared with listwise deletion
+            Cons
+            Can introduce bias if data are not MCAR
+
+        Imputation of missing data using Cold-deck imputation
+        with data Means
+            Pros
+            Retains sample size
+            Cons
+            Decreases standard deviation.
+            Creates smaller confidence intervals, increasing the probability of
+            Type 1 errors.
+
+    2.Identifying outliers and smoothing out noisy data:
+        Noisy data handling using Simple Discretization Methods Equal-width (distance) partitioning:
+            divide the range into N intervals of width w
+
+            If min and max are the lowest and highest values of the attribute,
+            the width of intervals w= (max-min)/N.
+
+            Interval boundaries - min+w, min+2w, ... , min+(N-1)w
+
+        Data Smoothing by bin Boundaries :
+
+            a data pre-processing/quantization technique used to group
+            a number of continuous values into a smaller number of bins.
+
+    3.Correcting inconsistent data:
+        Normalization :
+            Convert to all lower/all upper; remove whitespace
+
+            detecting and correcting values that contain known typographical
+            errors or variations.
+
+            expanding abbreviations and replacing them with standard forms;
+            replacing nicknames nicknames with their proper name forms
+
+        matching features using Absolute Matching Techniques:
+            Edit distance:
+                defined as the minimum number of edits needed to transform one
+                string into the other.
+                The lower the Lev Score, more similar the strings are.
+
+                Allowable edit operations
+                Insertion
+                Deletion
+                Substitution of a single character.
+
+
+
+Data Analysis  :
+    Linear Regression :
+    It is one of the methods of statistical analysis where the statistical tool is used for the investigation of relationships between the variables. It also shows the statistical significance of the estimated relationships, that is, degree of confidence which shows the true relationship that is close to the estimated relationship. It identifies and quantifies the factor. Linear regression on the other hand scans the data and calculates the parameters for the linear model which best fits the data. This method selects the optimal model through the least square criterion that minimizes the square error between predicted and actual values. Also, a note, that, the regression requires that all the fields stated in the model have a value. Even eradicate records with absent values from the analysis.
+
+
