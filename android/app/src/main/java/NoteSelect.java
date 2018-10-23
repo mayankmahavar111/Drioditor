@@ -1,12 +1,20 @@
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.hp.myapplication.R;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +34,57 @@ public class NoteSelect extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Snackbar.make(v, "Replace with your own action"  , Snackbar.LENGTH_LONG).setAction("Action" , null).show();
+
             }
         });
+        notesRecycler = (RecyclerView) findViewById(R.id.notes) ;
+        nAdapter = new NotesAdapter(noteList);
+        RecyclerView.LayoutManager mLayoutManager =
+                new LinearLayoutManager(getApplicationContext());
+        notesRecycler.setLayoutManager(mLayoutManager);
+        notesRecycler.setItemAnimator(new DefaultItemAnimator());
+        notesRecycler.setAdapter(nAdapter);
+        prepareNotes();
     }
+
+    private void prepareNotes(){
+        File directory;
+        directory = getFilesDir();
+        File[] files  = directory.listFiles();
+        String theFile;
+        for(int f=1 ; f< files.length ; f++){
+            theFile = "Note" + f +".txt";
+            NoteBuilder note  =  new NoteBuilder(theFile , Open(theFile));
+            noteList.add(note);
+        }
+
+    }
+
+    public String Open(String filename){
+        String content = " ";
+        try{
+            InputStream in  = openFileInput(filename);
+            if (in != null){
+                InputStreamReader tmp =  new InputStreamReader(in);
+                BufferedReader reader  = new BufferedReader(tmp);
+                String str;
+                StringBuilder buf  = new StringBuilder();
+                while ((str = reader.readLine()) != null){
+                    buf.append(str + "\n");
+
+                }
+                in.close();
+                content = buf.toString();
+            }
+
+
+        }catch (java.io.FileNotFoundException e) {} catch (Throwable t) {
+            Toast.makeText(this, "Exception is :" + t.toString() , Toast.LENGTH_LONG);
+        }
+
+        return content;
+
+    }
+
 }
