@@ -7,4 +7,10 @@
     <string name="exit">Exit</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_note">NoteActivity</string>
+    <string name="codenow">Code Now</string>
+    <string name="mlearning">Machine Learning</string>
+    <string name="c_input">Camera Input</string>
+    <string name="i_input">Image Input</string>
+    <string name="offline">Offline Mode</string>
+    <string name="feedback">Feedback</string>
 </resources>

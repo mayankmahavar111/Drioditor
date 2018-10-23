@@ -1,13 +1,12 @@
 logo
 username
 code now
-
 ml part
 camera
 image
 offline
 settings
-faq
+FAQ
 about
 feedback
 login
