@@ -1,0 +1,14 @@
+logo
+username
+code now
+
+ml part
+camera
+image
+offline
+settings
+faq
+about
+feedback
+login
+exit
