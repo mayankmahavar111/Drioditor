@@ -1,14 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
-<<<<<<< HEAD
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
     <string name="help">Help</string>
     <string name="about">About</string>
     <string name="exit">Exit</string>
-    <string name="setting">Settings</string>
-=======
     <string name="action_settings">Settings</string>
     <string name="title_activity_note">NoteActivity</string>
->>>>>>> 30383768f361b35f922693156a8e2fc7df6d3d02
 </resources>
