@@ -20,7 +20,8 @@
      -->
     <EditText
         android:layout_width="391dp"
-        android:layout_height="523dp"
+        android:layout_height="match_parent"
+        android:paddingTop="80dp"
         android:hint="Type here..."
         android:gravity="top"
         android:id="@+id/EditText1"
