@@ -10,13 +10,6 @@
     tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/activity_note_select">
 
-    <EditText
-        android:layout_width="391dp"
-        android:layout_height="523dp"
-        android:hint=""
-        android:gravity="top"
-        android:id="@+id/EditText1"
-        app:layout_constraintTop_toTopOf="parent"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
