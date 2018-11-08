@@ -18,20 +18,23 @@
             android:theme="?attr/actionBarTheme" />
 
         <EditText
-            android:layout_below="@+id/edit_code_activity_toolbar"
             android:id="@+id/input_code"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textMultiLine"
+            android:layout_height="444dp"
+            android:layout_above="@+id/textView2"
+            android:layout_below="@+id/edit_code_activity_toolbar"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="top"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="-4dp"
+            android:ems="10"
             android:gravity="top"
             android:hint="Please type your code here!!"
-            android:ems="10"
-            android:layout_gravity="top"
-            android:paddingEnd="12dp"
+            android:inputType="textMultiLine"
             android:paddingStart="12dp"
             android:paddingTop="4dp"
-            tools:text="@tools:sample/lorem/random"
-            />
+            android:paddingEnd="12dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/compile"
@@ -40,8 +43,20 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="31dp"
-            android:layout_marginBottom="31dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="91dp"
             android:src="@drawable/ic_play_circle_outline_black_24dp" />
+
+        <TextView
+            android:id="@+id/output"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="Display output here!!"
+            tools:text="@tools:sample/lorem/random"
+            />
 
 </RelativeLayout>

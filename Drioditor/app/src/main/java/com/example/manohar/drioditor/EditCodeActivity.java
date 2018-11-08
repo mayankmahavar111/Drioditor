@@ -114,47 +114,6 @@ public class EditCodeActivity extends AppCompatActivity {
 
             thread.start();
 
-            /*
-            Thread thread = new Thread(new Runnable() {
-                try {
-                    URL url  = new URL("http://10.52.34.12:8000/snippets/");
-
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    Log.i("check" , "It`s working till here");
-                    con.setRequestMethod("POST");
-                    con.setRequestProperty("Content-Type" , "application/json");
-                    con.setRequestProperty("Accept" , "application/json");
-                    Log.i("check" , "It`s working till here 2");
-                    con.setDoOutput(true);
-                    con.setDoInput(true);
-                    //con.connect();
-                    Log.i("check" , "It`s working till here 3");
-
-
-                    JSONObject jsonParam  = new JSONObject();
-                    jsonParam.put("code" , msg);
-                    jsonParam.put("title" , "Test");
-
-
-                    DataOutputStream os = new DataOutputStream(con.getOutputStream());
-                    os.writeBytes(jsonParam.toString());
-
-                    os.flush();
-                    os.close();
-
-                    Log.i("Status" , String.valueOf(con.getResponseCode()));
-                    Log.i("MSG" , con.getResponseMessage());
-
-                    con.disconnect();
-
-
-                }
-            catch (Exception e){
-
-                }
-            }*/
-
-
 
         }
     }
@@ -189,7 +148,6 @@ public class EditCodeActivity extends AppCompatActivity {
                 dao.updateCode(temp);
 
             }
-
 
             finish();
         }
