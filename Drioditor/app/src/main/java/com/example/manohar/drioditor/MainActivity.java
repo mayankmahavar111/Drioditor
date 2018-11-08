@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
         AccountHeader header=new AccountHeaderBuilder().withActivity(this)
                 .addProfiles(new ProfileDrawerItem()
                         .withEmail("Droiditor_feedback@gmail.com")
-                        .withName("User")
+                        .withName("User Name")
                         .withIcon(R.mipmap.ic_launcher))
                 .withSavedInstance(savedInstanceState)
                 .withHeaderBackground(R.drawable.ic_launcher_background)
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
         this.codes.addAll(list);
 
-        this.adapter = new codesAdapter(this, codes);
+        this.adapter = new codesAdapter(this, this.codes);
         this.adapter.setListener(this);
         this.recyclerView.setAdapter(adapter);
         showEmptyView();
