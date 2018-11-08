@@ -1,1 +1,2 @@
+.idea/
 "api part 2"/env/

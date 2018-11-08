@@ -1,10 +1,13 @@
 package com.example.manohar.drioditor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.support.v7.widget.Toolbar;
 
 import com.example.manohar.drioditor.db.codeDB;
 import com.example.manohar.drioditor.db.codeDao;
@@ -20,8 +23,15 @@ public class EditCodeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences=getSharedPreferences(MainActivity.APP_PREFERENCES,Context.MODE_PRIVATE);
+        int theme=sharedPreferences.getInt(MainActivity.THEME_Key,R.style.AppTheme);
+        setTheme(theme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_code);
+
+        Toolbar toolbar=findViewById(R.id.edit_code_activity_toolbar);
+        setSupportActionBar(toolbar);
+
         input_code=findViewById(R.id.input_code);
         dao = codeDB.getInstance(this).code_dao();
 
@@ -31,7 +41,7 @@ public class EditCodeActivity extends AppCompatActivity {
             input_code.setText(temp.getCodeText());
         }
         else
-            temp=new codes();
+            input_code.setFocusable(true);
     }
 
     @Override
@@ -52,12 +62,17 @@ public class EditCodeActivity extends AppCompatActivity {
         String text=input_code.getText().toString();
         if(!text.isEmpty()){
             long date=new Date().getTime();
-            temp.setCodeDate(date);
-            temp.setCodeText(text);
-            if(temp.getId()==-1)
+            if(temp==null){
+                temp=new codes(text,date);
                 dao.insertCode(temp);
-            else
+            }
+            else {
+                temp.setCodeText(text);
+                temp.setCodeDate(date);
                 dao.updateCode(temp);
+
+            }
+
 
             finish();
         }

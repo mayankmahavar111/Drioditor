@@ -2,6 +2,7 @@ package com.example.manohar.drioditor.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName =  "codes")
@@ -12,6 +13,9 @@ public class codes {
     private String codeText;
     @ColumnInfo(name = "date")
     private Long codeDate;
+
+    @Ignore
+    private boolean checked=false;
 
     public codes() {
     }
@@ -43,6 +47,14 @@ public class codes {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     @Override
