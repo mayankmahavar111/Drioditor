@@ -22,8 +22,14 @@ import com.example.manohar.drioditor.model.codes;
 
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -63,11 +69,18 @@ public class EditCodeActivity extends AppCompatActivity {
                 //Log.i("myapp" , "This is working");
                 Toast.makeText(getApplicationContext(), "compile and run" , Toast.LENGTH_LONG).show();
 
-                createMsg();
+                //createMsg();
+
+                try {
+                    getMsg("2");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
     }
+
 
     private void createMsg(){
         String msg= input_code.getText().toString();
@@ -81,7 +94,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     try {
 
                         String msg= input_code.getText().toString();
-                        URL url = new URL("http://10.0.2.2:8000/snippets/");
+                        URL url = new URL("http://10.52.34.12:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         conn.setRequestMethod("POST");
                         conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -159,6 +172,46 @@ public class EditCodeActivity extends AppCompatActivity {
         }
     }
 
+
+
+    private void getMsg(String id) throws IOException {
+
+        HttpURLConnection urlConnection = null;
+        BufferedReader reader = null;
+        String resultJson = "";
+        try {
+
+            String site_url_json = "http://10.0.2.2:8000/result/"+id+"/";
+            URL url = new URL(site_url_json);
+
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            urlConnection.setRequestProperty("Accept","application/json");
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            urlConnection.connect();
+
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuffer buffer = new StringBuffer();
+
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+
+            resultJson = buffer.toString();
+            Log.i("result" , resultJson);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
 
 
     @Override
