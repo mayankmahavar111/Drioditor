@@ -31,4 +31,16 @@
             android:paddingStart="12dp"
             android:paddingTop="4dp"
             />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/compile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="31dp"
+            android:src="@drawable/ic_play_circle_outline_black_24dp" />
+
 </RelativeLayout>
