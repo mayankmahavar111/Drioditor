@@ -30,6 +30,7 @@
             android:paddingEnd="12dp"
             android:paddingStart="12dp"
             android:paddingTop="4dp"
+            tools:text="@tools:sample/lorem/random"
             />
 
         <android.support.design.widget.FloatingActionButton

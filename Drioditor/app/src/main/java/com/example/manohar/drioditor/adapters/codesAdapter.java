@@ -110,6 +110,10 @@ public class codesAdapter extends RecyclerView.Adapter<codesAdapter.codeHolder> 
 
     public void setMultiCheckMode(boolean multiCheckMode) {
         this.multiCheckMode = multiCheckMode;
+        if(!multiCheckMode)
+            for(codes c:this.codes){
+            c.setChecked(false);
+            }
         notifyDataSetChanged();
     }
 }

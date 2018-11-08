@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName =  "codes")
 public class codes {
     @PrimaryKey(autoGenerate = true)
-    private int id=-1;
+    private int id;
     @ColumnInfo(name = "code")
     private String codeText;
     @ColumnInfo(name = "date")
