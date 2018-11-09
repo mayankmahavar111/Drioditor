@@ -20,6 +20,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manohar.drioditor.adapters.codesAdapter;
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
     public static final String THEME_Key="app_theme";
     public static final String APP_PREFERENCES="code_settings";
     public int theme;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
