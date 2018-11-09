@@ -36,6 +36,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.Random;
 
 public class EditCodeActivity extends AppCompatActivity {
     private codeDao dao;
@@ -65,15 +66,6 @@ public class EditCodeActivity extends AppCompatActivity {
         input_code=findViewById(R.id.input_code);
         dao = codeDB.getInstance(this).code_dao();
         final String[] output = {"Unable to get result"};
-        handler =new Handler();
-        final Runnable r = new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        };
-
-
 
 
         if(getIntent().getExtras()!=null){
@@ -91,12 +83,27 @@ public class EditCodeActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "compile and run" , Toast.LENGTH_LONG).show();
 
-                //createMsg();
+                final int min = 1;
+                final int max = 100000;
+                final int random = new Random().nextInt((max - min) + 1) + min;
+                createMsg(random);
 
+
+                out.setText("");
                 try {
-                    getMsg("14" );
+                    getMsg( Integer.toString(random) );
                     //handler.postDelayed(r, 100000);
-                    out.setText(result);
+                    try{
+                        String res [] = result.split("\n");
+                        for(int i=0 ; i<res.length; i++ ) {
+                            out.append(res[i]);
+                            out.append(System.getProperty("line.separator"));
+                        }
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -108,7 +115,7 @@ public class EditCodeActivity extends AppCompatActivity {
     }
 
 
-    private void createMsg(){
+    private void createMsg(final int random){
         String msg= input_code.getText().toString();
         if (msg.isEmpty() )
             Toast.makeText(EditCodeActivity.this, "Nothing to compile and run", Toast.LENGTH_SHORT).show();
@@ -119,8 +126,12 @@ public class EditCodeActivity extends AppCompatActivity {
                     try {
 
                         String msg= input_code.getText().toString();
-                        URL url = new URL("http://10.52.34.12:8000/snippets/");
+                        URL url = new URL("http://14.139.155.214/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+
+
+
                         conn.setRequestMethod("POST");
                         conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
                         conn.setRequestProperty("Accept","application/json");
@@ -129,7 +140,7 @@ public class EditCodeActivity extends AppCompatActivity {
 
                         JSONObject jsonParam = new JSONObject();
                         jsonParam.put("code" , msg);
-                        jsonParam.put("title" , "Test");
+                        jsonParam.put("title" , Integer.toString(random));
 
 
                         Log.i("JSON", jsonParam.toString());
@@ -167,7 +178,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 URL url;
                 StringBuffer response = new StringBuffer();
                 try {
-                    url = new URL("http://10.0.2.2:8000/result/"+id+"/");
+                    url = new URL("http://14.139.155.214/result/"+id+"/");
                 } catch (MalformedURLException e) {
                     throw new IllegalArgumentException("invalid url");
                 }
@@ -187,7 +198,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     int status = conn.getResponseCode();
                     Log.i("check" , "worked till 2");
                     if (status != 200) {
-                        throw new IOException("Post failed with error code " + status);
+                        throw new IOException("get failed with error code " + status);
                     } else {
                         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                         Log.i("check" , "worked till 3");

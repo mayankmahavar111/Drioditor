@@ -59,7 +59,7 @@ def snippet_detail(request, pk , format=None):
 def result(request, pk, format=None):
     print("Inside result")
     try:
-        snippet = Snippet.objects.get(pk=pk)
+        snippet = Snippet.objects.get(title=str(pk))
     except Snippet.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
