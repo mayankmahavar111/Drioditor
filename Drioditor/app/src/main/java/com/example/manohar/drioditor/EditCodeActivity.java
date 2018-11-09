@@ -2,6 +2,8 @@ package com.example.manohar.drioditor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manohar.drioditor.db.codeDB;
@@ -39,6 +42,10 @@ public class EditCodeActivity extends AppCompatActivity {
     private EditText input_code;
     private codes temp;
     public static final String CODE_EXTRA_Key="code_id";
+    public TextView out ;
+    public String result;
+    Handler handler ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +56,25 @@ public class EditCodeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_code);
 
 
+
         FloatingActionButton compile = (FloatingActionButton) findViewById(R.id.compile);
         Toolbar toolbar=findViewById(R.id.edit_code_activity_toolbar);
         setSupportActionBar(toolbar);
+
+        out = (TextView) findViewById(R.id.textView2);
         input_code=findViewById(R.id.input_code);
         dao = codeDB.getInstance(this).code_dao();
+        final String[] output = {"Unable to get result"};
+        handler =new Handler();
+        final Runnable r = new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        };
+
+
+
 
         if(getIntent().getExtras()!=null){
             int id=getIntent().getExtras().getInt(CODE_EXTRA_Key,0);
@@ -67,17 +88,22 @@ public class EditCodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Log.i("myapp" , "This is working");
+
                 Toast.makeText(getApplicationContext(), "compile and run" , Toast.LENGTH_LONG).show();
 
                 //createMsg();
 
                 try {
-                    getMsg("2");
+                    getMsg("14" );
+                    //handler.postDelayed(r, 100000);
+                    out.setText(result);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
+
+
 
     }
 
@@ -87,7 +113,6 @@ public class EditCodeActivity extends AppCompatActivity {
         if (msg.isEmpty() )
             Toast.makeText(EditCodeActivity.this, "Nothing to compile and run", Toast.LENGTH_SHORT).show();
         else{
-
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -133,40 +158,65 @@ public class EditCodeActivity extends AppCompatActivity {
 
 
 
-    private void getMsg(String id) throws IOException {
+    private void getMsg(final String id ) throws IOException {
 
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
-        String resultJson = "";
-        try {
+        final String[] output = {"Unable to get result"};
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URL url;
+                StringBuffer response = new StringBuffer();
+                try {
+                    url = new URL("http://10.0.2.2:8000/result/"+id+"/");
+                } catch (MalformedURLException e) {
+                    throw new IllegalArgumentException("invalid url");
+                }
 
-            String site_url_json = "http://10.0.2.2:8000/result/"+id+"/";
-            URL url = new URL(site_url_json);
+                HttpURLConnection conn = null;
+                try {
+                    conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(false);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+                    //conn.setRequestProperty("Accept","application/form");
 
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-            urlConnection.setRequestProperty("Accept","application/json");
-            urlConnection.setDoInput(true);
-            urlConnection.setDoOutput(true);
-            urlConnection.connect();
+                    Log.i("check" , "worked till 1");
+                    // handle the response
+                    int status = conn.getResponseCode();
+                    Log.i("check" , "worked till 2");
+                    if (status != 200) {
+                        throw new IOException("Post failed with error code " + status);
+                    } else {
+                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        Log.i("check" , "worked till 3");
+                        String inputLine;
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
 
-            InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+                    //Here is your json in string format
+                    String responseJSON = response.toString();
+                    //Log.i("check" , responseJSON);
+                    result = responseJSON;
 
-            reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line);
+                    Log.i("check" , result);
+                }
             }
 
-            resultJson = buffer.toString();
-            Log.i("result" , resultJson);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        });
+                thread.start();
 
 
 
