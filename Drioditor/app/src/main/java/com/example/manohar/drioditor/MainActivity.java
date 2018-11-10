@@ -124,11 +124,11 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
         AccountHeader header=new AccountHeaderBuilder().withActivity(this)
                 .addProfiles(new ProfileDrawerItem()
-                        .withEmail("Droiditor_feedback@gmail.com")
-                        .withName("User Name")
-                        .withIcon(R.mipmap.ic_launcher))
+                        .withEmail("manoharmadanu@gmail.com")
+                        .withName("Manohar Madanu")
+                        .withIcon(R.drawable.ic_tag_faces_black_24dp))
                 .withSavedInstance(savedInstanceState)
-                .withHeaderBackground(R.drawable.ic_launcher_background)
+                .withHeaderBackground(R.color.accent_dark)
                 .withSelectionListEnabledForSingleProfile(false)
                 .build();
 
