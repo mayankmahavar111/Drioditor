@@ -1,5 +1,6 @@
 package com.example.manohar.drioditor;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.ActionMode;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
         iDrawerItems.add(new PrimaryDrawerItem().withName("Home").withIcon(R.drawable.ic_home_black_24dp));
         iDrawerItems.add(new PrimaryDrawerItem().withName("Codes").withIcon(R.drawable.ic_code_black_24dp));
+        iDrawerItems.add(new PrimaryDrawerItem().withName("ML Template").withIcon(R.drawable.ic_code_black_24dp));
 
         List<IDrawerItem> stickyItems=new ArrayList<>();
         SwitchDrawerItem switchDrawerItem=new SwitchDrawerItem()
@@ -350,7 +353,47 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
     public boolean onItemClick(View view,int position,IDrawerItem drawerItem){
 
-        Toast.makeText(this,""+position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,""+position, Toast.LENGTH_SHORT).show();
+
+        switch (position){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                Activity a = (Activity) getActivity();
+                LayoutInflater inflater = a.getLayoutInflater();
+
+                builder.setView(inflater.inflate(R.layout.dialog_link, null));
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        TextView text_url=(TextView)findViewById(R.id.drive_url);
+                        String url=text_url.getText().toString();
+                        Log.i("url",url);
+
+                    }
+                });
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                break;
+            default:
+                break;
+        }
+
         return false;
     }
+
+    private Context getActivity() {
+        return this;
+    }
+
 }

@@ -129,9 +129,6 @@ public class EditCodeActivity extends AppCompatActivity {
                         URL url = new URL("http://14.139.155.214/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-
-
-
                         conn.setRequestMethod("POST");
                         conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
                         conn.setRequestProperty("Accept","application/json");
