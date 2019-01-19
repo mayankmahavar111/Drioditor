@@ -28,7 +28,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ml_code"
-            android:label="@string/title_activity_ml_code"></activity>
+            android:label="@string/title_activity_ml_code" />
+        <activity
+            android:name=".dialog_act"
+            android:label="@string/title_activity_dialog_act"></activity>
     </application>
 
 </manifest>

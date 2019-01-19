@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -353,6 +354,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
     public boolean onItemClick(View view,int position,IDrawerItem drawerItem){
 
+
         //Toast.makeText(this,""+position, Toast.LENGTH_SHORT).show();
 
         switch (position){
@@ -361,18 +363,20 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
             case 2:
                 break;
             case 3:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                open_dialog_activity();
+
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 Activity a = (Activity) getActivity();
                 LayoutInflater inflater = a.getLayoutInflater();
 
                 builder.setView(inflater.inflate(R.layout.dialog_link, null));
 
+
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        /*
-                        TextView text_url=(TextView)findViewById(R.id.drive_url);
+                        EditText text_url=(EditText) findViewById(R.id.drive_url);
                         String url=text_url.getText().toString();
-                        Log.i("url",url);*/
+                        //Log.i("url",url);
                         openActivity();
 
                     }
@@ -384,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
                 });
 
                 AlertDialog dialog = builder.create();
-                dialog.show();
+                dialog.show();*/
 
                 break;
             default:
@@ -394,13 +398,14 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
         return false;
     }
 
+    private void open_dialog_activity() {
+        Intent intent=new Intent(this,dialog_act.class);
+        startActivity(intent);
+    }
+
     private Context getActivity() {
         return this;
     }
 
-    public void openActivity(){
-        Intent intent=new Intent(this,ml_code.class);
-        startActivity(intent);
-    }
 
 }
