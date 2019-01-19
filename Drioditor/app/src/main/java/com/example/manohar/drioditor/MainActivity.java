@@ -369,9 +369,11 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        /*
                         TextView text_url=(TextView)findViewById(R.id.drive_url);
                         String url=text_url.getText().toString();
-                        Log.i("url",url);
+                        Log.i("url",url);*/
+                        openActivity();
 
                     }
                 });
@@ -394,6 +396,11 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
     private Context getActivity() {
         return this;
+    }
+
+    public void openActivity(){
+        Intent intent=new Intent(this,ml_code.class);
+        startActivity(intent);
     }
 
 }

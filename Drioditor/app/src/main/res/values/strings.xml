@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Drioditor</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_ml_code">ml_code</string>
 </resources>
