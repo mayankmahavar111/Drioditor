@@ -11,9 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-//import com.github.clans.fab.FloatingActionButton;
-//import android.support.design.widget.FloatingActionButton;
-import android.widget.Button;
 import android.widget.EditText;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -137,26 +134,10 @@ public class EditCodeActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute() {
-            
+
         }
 
     }
-
-
-/*
-    private class msgPart2 extends AsyncTask{
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            try {
-                getMsg(Integer.toString(random));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }*/
-
 
     private void createMsg(final int random){
         String msg= input_code.getText().toString();
@@ -166,10 +147,13 @@ public class EditCodeActivity extends AppCompatActivity {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
+
+
+                    //Get Method
                     try {
 
                         String msg= input_code.getText().toString();
-                        URL url = new URL("http://10.0.2.2:8000/snippets/");
+                        URL url = new URL("http://10.52.34.12:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 
@@ -202,12 +186,12 @@ public class EditCodeActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-
+                    //Post Method
                     URL url;
                     StringBuffer response = new StringBuffer();
                     String id = Integer.toString(random);
                     try {
-                        url = new URL("http://10.0.2.2:8000/result/"+id+"/");
+                        url = new URL("http://10.52.34.12:8000/result/"+id+"/");
                     } catch (MalformedURLException e) {
                         throw new IllegalArgumentException("invalid url");
                     }
@@ -273,7 +257,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 URL url;
                 StringBuffer response = new StringBuffer();
                 try {
-                    url = new URL("http://10.0.2.2:8000/result/"+id+"/");
+                    url = new URL("http://10.52.34.12:8000/result/"+id+"/");
                 } catch (MalformedURLException e) {
                     throw new IllegalArgumentException("invalid url");
                 }
