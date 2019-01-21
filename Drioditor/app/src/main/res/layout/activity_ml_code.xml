@@ -21,14 +21,14 @@
 
     <EditText
         android:id="@+id/input_ml_code"
-        android:layout_width="353dp"
+        android:layout_width="347dp"
         android:layout_height="match_parent"
         android:layout_below="@+id/edit_code_activity_toolbar"
         android:layout_alignParentStart="true"
         android:layout_gravity="top"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="37dp"
         android:layout_marginTop="-2dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="1dp"
         android:background="@android:color/transparent"
         android:ems="10"
         android:gravity="top"
@@ -43,13 +43,23 @@
     <TextView
         android:id="@+id/lineNumber"
         android:layout_width="35dp"
-        android:layout_height="412dp"
-        android:layout_alignTop="@+id/input_code"
-        android:layout_alignBottom="@+id/input_code"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/edit_code_activity_toolbar"
         android:gravity="center_horizontal"
         android:paddingTop="10dp"
         android:background="@android:color/transparent"
         android:text="1"
         android:layout_alignParentStart="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/compile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/ic_play_circle_outline_black_24dp" />
 
 </RelativeLayout>
