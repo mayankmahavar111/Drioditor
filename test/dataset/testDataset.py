@@ -234,23 +234,19 @@ if __name__ == '__main__':
     f=open('{}'.format(filename) ,'r')
     data= f.readlines()
     f.close()
+
+
     column=data[0].split(",")
     column[-1] =column[-1].replace('\n','')
     data=data[1:]
     data=convertData(data)
     check = checkData(data,len(column))
-    #print(check)
     newColumn = updateColumn(check,column)
     newData = updateDataset(check,data)
-    #print (len(newData),len(newColumn))
-    #print(newColumn)
     df = DataFrame(newData)
     df= df.transpose()
     df= df.apply(pd.to_numeric)
     correlation = df.corr()
-    sns.heatmap(correlation,
-                xticklabels=newColumn,
-                yticklabels=newColumn,)
-    #plt.show()
+    sns.heatmap(correlation,xticklabels=newColumn,yticklabels=newColumn)
     plt.savefig('data/test.jpg')
     details(data,df,newColumn,'data/test.jpg')
