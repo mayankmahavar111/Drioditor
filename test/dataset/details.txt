@@ -1,0 +1,31 @@
+rows
+column
+    mean
+    median
+    mode
+
+correlation heatmap
+
+supervised
+    algorithm
+        naive bayes
+        knn
+        svm
+        nn
+        decsion tree
+        linearregression
+
+    time taken
+    accuracy
+    tpr
+    tnr
+
+unsupervised
+    algorithm
+        kmeans
+        pca
+    time taken
+    tpr
+    tnr
+
+suggested algorithm for the given datset

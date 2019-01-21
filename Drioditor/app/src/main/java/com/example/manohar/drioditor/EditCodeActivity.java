@@ -11,9 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-//import com.github.clans.fab.FloatingActionButton;
-//import android.support.design.widget.FloatingActionButton;
-import android.widget.Button;
 import android.widget.EditText;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -45,6 +42,7 @@ public class EditCodeActivity extends AppCompatActivity {
     public static final String CODE_EXTRA_Key="code_id";
     public TextView out ;
     public String result;
+    public int random;
     Handler handler ;
 
 
@@ -84,29 +82,40 @@ public class EditCodeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "compile and run" , Toast.LENGTH_LONG).show();
 
                 final int min = 1;
-                final int max = 100000;
-                final int random = new Random().nextInt((max - min) + 1) + min;
+                final int max = 1000;
+                random = new Random().nextInt((max - min) + 1) + min;
+
+                Object [] objects;
+                objects = new Object[0];
+
+                Msg msg = new Msg();
+                msg.doInBackground(objects);
+
+                /*
+                msgPart2 msg2 = new msgPart2();
+                msg2.doInBackground(objects);*/
+
+                /*
                 createMsg(random);
 
 
-                out.setText("");
+
                 try {
                     getMsg( Integer.toString(random) );
+                    */
                     //handler.postDelayed(r, 100000);
-                    try{
-                        String res [] = result.split("\n");
-                        for(int i=0 ; i<res.length; i++ ) {
-                            out.append(res[i]);
-                            out.append(System.getProperty("line.separator"));
-                        }
-
-                    }catch (Exception e){
-                        e.printStackTrace();
+                out.setText("");
+                try{
+                    String res [] = result.split("\n");
+                    for(int i=0 ; i<res.length; i++ ) {
+                        out.append(res[i]);
+                        out.append(System.getProperty("line.separator"));
                     }
 
-                } catch (IOException e) {
+                }catch (Exception e){
                     e.printStackTrace();
                 }
+
             }
         });
 
@@ -114,6 +123,21 @@ public class EditCodeActivity extends AppCompatActivity {
 
     }
 
+
+    private class Msg extends AsyncTask{
+
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            createMsg(random);
+            return null;
+        }
+
+        protected void onPostExecute() {
+
+        }
+
+    }
 
     private void createMsg(final int random){
         String msg= input_code.getText().toString();
@@ -123,10 +147,13 @@ public class EditCodeActivity extends AppCompatActivity {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
+
+
+                    //Get Method
                     try {
 
                         String msg= input_code.getText().toString();
-                        URL url = new URL("http://14.139.155.214/snippets/");
+                        URL url = new URL("http://10.52.34.12:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -155,6 +182,56 @@ public class EditCodeActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    //Post Method
+                    URL url;
+                    StringBuffer response = new StringBuffer();
+                    String id = Integer.toString(random);
+                    try {
+                        url = new URL("http://10.52.34.12:8000/result/"+id+"/");
+                    } catch (MalformedURLException e) {
+                        throw new IllegalArgumentException("invalid url");
+                    }
+
+                    HttpURLConnection conn = null;
+                    try {
+                        conn = (HttpURLConnection) url.openConnection();
+                        conn.setDoOutput(false);
+                        conn.setDoInput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestMethod("GET");
+                        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+                        //conn.setRequestProperty("Accept","application/form");
+
+                        Log.i("check" , "worked till 1");
+                        // handle the response
+                        int status = conn.getResponseCode();
+                        Log.i("check" , "worked till 2");
+                        if (status != 200) {
+                            throw new IOException("get failed with error code " + status);
+                        } else {
+                            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                            Log.i("check" , "worked till 3");
+                            String inputLine;
+                            while ((inputLine = in.readLine()) != null) {
+                                response.append(inputLine);
+                            }
+                            in.close();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (conn != null) {
+                            conn.disconnect();
+                        }
+
+                        //Here is your json in string format
+                        String responseJSON = response.toString();
+                        //Log.i("check" , responseJSON);
+                        result = responseJSON;
+
+                        Log.i("check" , result);
+                    }
                 }
             });
 
@@ -163,6 +240,8 @@ public class EditCodeActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 
 
@@ -175,7 +254,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 URL url;
                 StringBuffer response = new StringBuffer();
                 try {
-                    url = new URL("http://14.139.155.214/result/"+id+"/");
+                    url = new URL("http://10.52.34.12:8000/result/"+id+"/");
                 } catch (MalformedURLException e) {
                     throw new IllegalArgumentException("invalid url");
                 }
