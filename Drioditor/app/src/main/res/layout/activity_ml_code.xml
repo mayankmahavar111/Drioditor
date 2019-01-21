@@ -20,9 +20,9 @@
 
 
     <EditText
-        android:id="@+id/input_code"
+        android:id="@+id/input_ml_code"
         android:layout_width="353dp"
-        android:layout_height="413dp"
+        android:layout_height="match_parent"
         android:layout_above="@+id/textView2"
         android:layout_below="@+id/edit_code_activity_toolbar"
         android:layout_alignParentStart="true"
