@@ -15,6 +15,12 @@ def details(data,df,newcolumn,image):
     epw = pdf.w - 2 * pdf.l_margin
     col_width = epw / 4
 
+    pdf.set_font('Times', 'B', 35)
+    pdf.cell(epw, 0.0, 'Drioditor', align='C')
+    pdf.set_font('Times', '', 10.0)
+
+    pdf.cell(200, 10, txt="\n", ln=1)
+    pdf.cell(200, 10, txt="\n", ln=1)
     pdf.set_font('Times', 'B', 20)
     pdf.cell(epw, 0.0, 'Recommendation Report', align='C')
     pdf.set_font('Times', '', 10.0)
@@ -27,6 +33,7 @@ def details(data,df,newcolumn,image):
     pdf.cell(200, 10, txt="\n", ln=1)
     pdf.cell(200, 10, txt="Rows : {}".format(row), ln=1)
     pdf.cell(200, 10, txt="Columns : {}".format(column), ln=1)
+    pdf.cell(200, 10, txt="Missing Values : {}".format(0), ln=1)
 
     avg=df.mean()
     median=df.median()
@@ -166,8 +173,8 @@ def details(data,df,newcolumn,image):
     pdf.set_font('Times', '', 10.0)
     pdf.ln(0.5)
 
-    pdf.cell(200, 10, txt="Based on Accuracy : {} with accuracy {}".format(accuracy_name,max_accuracy), ln=1)
-    pdf.cell(200, 10, txt="Based on Time : {} with time taken {}".format(time_name,min_time), ln=1)
+    pdf.cell(200, 10, txt="Based on Accuracy    : {} with accuracy {}%".format(accuracy_name,max_accuracy*100), ln=1)
+    pdf.cell(200, 10, txt="Based on Time        : {} with time taken {}s".format(time_name,round(min_time,6)), ln=1)
     #print(max_accuracy,accuracy_name)
     #print(min_time,time_name)
 
@@ -223,7 +230,7 @@ def convertData(data):
 
 if __name__ == '__main__':
 
-    filename='data/spectf.csv'
+    filename='data/iris.csv'
     f=open('{}'.format(filename) ,'r')
     data= f.readlines()
     f.close()
