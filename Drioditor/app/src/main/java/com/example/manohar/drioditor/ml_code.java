@@ -17,6 +17,7 @@ public class ml_code extends Activity {
         if (values != null) {
             String url = values.getString("url");
             String dataset_name=values.getString("dataset_name");
+            String report_gmail=values.getString("report_gmail");
             Log.i("values",url+""+dataset_name);
         }
         TextView out ;

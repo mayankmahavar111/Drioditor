@@ -23,22 +23,21 @@
         android:id="@+id/input_ml_code"
         android:layout_width="353dp"
         android:layout_height="match_parent"
-        android:layout_above="@+id/textView2"
         android:layout_below="@+id/edit_code_activity_toolbar"
         android:layout_alignParentStart="true"
         android:layout_gravity="top"
         android:layout_marginStart="35dp"
-        android:background="@android:color/transparent"
         android:layout_marginTop="-2dp"
-        android:textSize="18dp"
         android:layout_marginBottom="28dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:gravity="top"
         android:hint="Edit Pre-Processing code here!!"
         android:inputType="textMultiLine"
         android:paddingStart="12dp"
         android:paddingTop="4dp"
-        android:paddingEnd="12dp" />
+        android:paddingEnd="12dp"
+        android:textSize="18dp" />
 
 
     <TextView
