@@ -22,15 +22,18 @@ public class dialog_act extends Activity {
                 String url=text_url.getText().toString();
                 EditText text_name=findViewById(R.id.dataset_name);
                 String dataset_name=text_name.getText().toString();
-                openActivity(url,dataset_name);
+                EditText gmail_report=findViewById(R.id.gmail_report);
+                String report_gmail=gmail_report.getText().toString();
+                openActivity(url,dataset_name,report_gmail);
             }
         });
     }
 
-    public void openActivity(String url, String dataset_name){
+    public void openActivity(String url, String dataset_name, String report_gmail){
         Intent intent=new Intent(this,ml_code.class);
         intent.putExtra("url",url);
         intent.putExtra("dataset_name",dataset_name);
+        intent.putExtra("report_gmail",report_gmail);
         startActivity(intent);
     }
 
