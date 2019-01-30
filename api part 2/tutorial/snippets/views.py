@@ -12,9 +12,6 @@ import os
 
 @api_view(['GET', 'POST'])
 def snippet_list(request , format=None):
-    """
-    List all code snippets, or create a new snippet.
-    """
     print("inside list")
     if request.method == 'GET':
         snippets = Snippet.objects.all()
