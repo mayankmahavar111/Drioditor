@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/edit_code_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:title="@string/app_name"
+        android:theme="?attr/actionBarTheme" />
+
+
+    <TextView
+        android:id="@+id/abcd"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/edit_code_activity_toolbar"
+        android:layout_marginTop="10dip"
+        android:text="Available Templates:"
+        android:layout_marginBottom="5dp"
+        />
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:paddingLeft="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/abcd"
+        />
+
+    <EditText
+        android:id="@+id/drive_url"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:paddingLeft="20dp"
+        android:hint="Drive URL"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/dataset_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="20dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:hint="Dataset Name"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/gmail_report"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+
+        android:paddingLeft="20dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/drive_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:text="Submit"
+        android:textColor="#fff" />
+
+</LinearLayout>
+

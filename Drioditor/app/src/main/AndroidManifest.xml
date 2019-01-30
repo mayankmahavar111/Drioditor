@@ -31,7 +31,13 @@
             android:label="@string/title_activity_ml_code" />
         <activity
             android:name=".dialog_act"
-            android:label="@string/title_activity_dialog_act"></activity>
+            android:label="@string/title_activity_dialog_act" />
+        <activity
+            android:name=".ml_template"
+            android:label="@string/title_activity_ml_template" />
+        <activity
+            android:name=".template"
+            android:label="@string/title_activity_template"></activity>
     </application>
 
 </manifest>

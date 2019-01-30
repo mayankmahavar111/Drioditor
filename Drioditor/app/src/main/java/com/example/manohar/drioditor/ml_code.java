@@ -20,10 +20,8 @@ public class ml_code extends Activity {
             String report_gmail=values.getString("report_gmail");
             Log.i("values",url+""+dataset_name);
         }
-        TextView out ;
-        out = (TextView) findViewById(R.id.input_ml_code);
-        out.setText("\n" +
-                "def updateDataset(check, data):\n" +
+        TextView out = (TextView) findViewById(R.id.input_ml_code);
+        out.setText("def updateDataset(check, data):\n" +
                 "    temp=[]\n" +
                 "    for i in range(len(check)):\n" +
                 "        if check[i] == 1:\n" +
