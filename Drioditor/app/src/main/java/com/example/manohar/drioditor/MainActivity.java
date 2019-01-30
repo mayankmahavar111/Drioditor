@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
         iDrawerItems.add(new PrimaryDrawerItem().withName("Home").withIcon(R.drawable.ic_home_black_24dp));
         iDrawerItems.add(new PrimaryDrawerItem().withName("Codes").withIcon(R.drawable.ic_code_black_24dp));
+        iDrawerItems.add(new PrimaryDrawerItem().withName("ML Recommendation").withIcon(R.drawable.ic_code_black_24dp));
         iDrawerItems.add(new PrimaryDrawerItem().withName("ML Template").withIcon(R.drawable.ic_code_black_24dp));
 
         List<IDrawerItem> stickyItems=new ArrayList<>();
@@ -358,6 +359,9 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
         //Toast.makeText(this,""+position, Toast.LENGTH_SHORT).show();
 
         switch (position){
+            case -1:
+                open_settings_activity();
+                break;
             case 1:
                 break;
             case 2:
@@ -391,11 +395,22 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
                 dialog.show();*/
 
                 break;
+            case 4:
+                open_ml_template_activity();
             default:
                 break;
         }
 
         return false;
+    }
+
+    private void open_settings_activity() {
+
+    }
+
+    private void open_ml_template_activity() {
+        Intent intent=new Intent(this,ml_template.class);
+        startActivity(intent);
     }
 
     private void open_dialog_activity() {
