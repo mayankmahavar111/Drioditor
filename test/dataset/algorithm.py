@@ -56,17 +56,9 @@ def knn(dataset):
     for i in range(len(data)):
         Y.append(data[i].split(',')[-1])
 
-    #X_train,Y_train,X_test,Y_test=splitdataset(X,Y,0.70)
-
-
-    #print(Y[0])
-    #print(len(X_train),len(Y_train),len(X_test),len(Y_test))
-    #print(Y_train,Y_test)
     clf=neighbors.KNeighborsClassifier()
     clf.fit(X,Y)
     pred=clf.predict(X)
-    #print(Y_test)
-    #print(pred)
     cm=confusion_matrix(Y,pred)
 
     print(cm)

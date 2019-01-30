@@ -7,8 +7,24 @@ from rest_framework.response import Response
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
 import os
+from google_drive_downloader import GoogleDriveDownloader as gdd
 
 
+
+def downloadDataset(url,name):
+    try:
+        id = url.split("=")[-1]
+        gdd.download_file_from_google_drive(file_id=id,
+                                            dest_path='./data/{}'.format(name))
+        return True
+    except Exception as e:
+        print e
+        return False
+
+
+@api_view(['GET' , 'PUT'])
+def recommendation(request,format=None):
+    pass
 
 @api_view(['GET', 'POST'])
 def snippet_list(request , format=None):
@@ -28,7 +44,7 @@ def snippet_list(request , format=None):
 @api_view(['GET', 'PUT', 'DELETE'])
 def snippet_detail(request, pk , format=None):
 
-    print("inside detail")
+    #print("inside detail")
     try:
         snippet = Snippet.objects.get(pk=pk)
 
@@ -37,7 +53,7 @@ def snippet_detail(request, pk , format=None):
 
     if request.method == 'GET':
         serializer = SnippetSerializer(snippet)
-        print(serializer.data['code'])
+        #print(serializer.data['code'])
         return Response(serializer.data['code'])
 
     elif request.method == 'PUT':
