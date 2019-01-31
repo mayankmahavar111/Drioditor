@@ -37,7 +37,8 @@
             android:label="@string/title_activity_ml_template" />
         <activity
             android:name=".template"
-            android:label="@string/title_activity_template"></activity>
+            android:label="@string/title_activity_template" />
+        <activity android:name=".SettingsPrefActivity"></activity>
     </application>
 
 </manifest>
