@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            open_settings_activity();
             return true;
         }
 
@@ -405,7 +406,8 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
     }
 
     private void open_settings_activity() {
-
+        Intent intent=new Intent(this,SettingsPrefActivity.class);
+        startActivity(intent);
     }
 
     private void open_ml_template_activity() {
