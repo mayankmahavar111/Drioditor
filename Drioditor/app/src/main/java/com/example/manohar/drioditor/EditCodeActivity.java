@@ -153,7 +153,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     try {
 
                         String msg= input_code.getText().toString();
-                        URL url = new URL("http://10.52.34.12:8000/snippets/");
+                        URL url = new URL("http://10.0.2.2:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -188,7 +188,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     StringBuffer response = new StringBuffer();
                     String id = Integer.toString(random);
                     try {
-                        url = new URL("http://10.52.34.12:8000/result/"+id+"/");
+                        url = new URL("http://10.0.2.2:8000/result/"+id+"/");
                     } catch (MalformedURLException e) {
                         throw new IllegalArgumentException("invalid url");
                     }

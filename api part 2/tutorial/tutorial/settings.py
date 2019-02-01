@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['127.0.0.1' ,'localhost' ,'10.0.2.2','10.52.34.12']
 
 
 #APPEND_SLASH=False
-# Application definition
+#Application definition
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
