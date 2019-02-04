@@ -6,8 +6,56 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from snippets.models import Snippet,recommend
 from snippets.serializers import SnippetSerializer,RecommendataionSerializer
+from django.conf import settings
+from django.core.mail import EmailMessage
 import os
 from google_drive_downloader import GoogleDriveDownloader as gdd
+
+
+def mail(email,y):
+    subject='recommendation'
+    from_email=settings.EMAIL_HOST_USER
+    to_email=[email]
+    print("inside mail")
+
+
+    msg = EmailMessage(
+        subject=subject,
+        body="Recommendation report of the provided dataset is attached below.",
+        from_email=from_email,
+        to=to_email
+    )
+    msg.attach_file('data/output.pdf')
+    msg.attach_file('mlrecommendation.py')
+    msg.send(fail_silently=False)
+    """
+    msg = MIMEMultipart()
+
+    #msg['From'] = from_email
+    #msg['To'] = str(email)
+
+    msg['Subject'] = "ML Recommendation"
+
+    body = "Recommendation report of the provided dataset is attached below."
+    msg.attach(MIMEText(body, 'plain'))
+
+    filename = "output.pdf"
+    attachment = open("data/output.pdf", "rb").decode('utf-8')
+    body = MIMEText(attachment.read())
+
+    msg.attach(body)
+    try:
+        send_mail(
+            subject,
+            msg.as_string(),
+            from_email,
+            (email,)
+        )
+    except Exception as e:
+        print(e)
+    """
+    print("Finished mailing")
+    return
 
 
 
@@ -44,7 +92,10 @@ def recommendation(request,format=None):
                 f.write(x+'\n')
             f.write('\n'+code)
 
+            f.close()
+
             os.system('python mlRecommendation.py')
+            mail(emailid,code)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

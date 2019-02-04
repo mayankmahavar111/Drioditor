@@ -29,6 +29,15 @@ ALLOWED_HOSTS = ['127.0.0.1' ,'localhost' ,'10.0.2.2','10.52.34.12']
 
 
 
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='drioditor@gmail.com'
+EMAIL_HOST_PASSWORD='majornitk '
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 #APPEND_SLASH=False
 #Application definition
 
