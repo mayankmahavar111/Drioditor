@@ -16,16 +16,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80c9afe8-5d60-4747-93c3-084bee29dde8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Drioditor/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drioditor/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drioditor/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drioditor/app/src/main/java/com/example/manohar/drioditor/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/app/src/main/java/com/example/manohar/drioditor/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drioditor/app/src/main/java/com/example/manohar/drioditor/ml_code.java" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/app/src/main/java/com/example/manohar/drioditor/ml_code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drioditor/app/src/main/res/layout/activity_edit_code.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/app/src/main/res/layout/activity_edit_code.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drioditor/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drioditor/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Drioditor/build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="80c9afe8-5d60-4747-93c3-084bee29dde8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,15 +39,15 @@
     <session id="309677134">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/dataset/algorithm.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -2388,17 +2379,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Drioditor" type="58d84e3e:PackageViewProjectNode" />
-              <item name="app" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2416,6 +2396,17 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="mipmap" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Drioditor" type="58d84e3e:PackageViewProjectNode" />
+              <item name="app" type="616d4139:PackageViewModuleNode" />
             </path>
           </expand>
           <select />
@@ -2563,7 +2554,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21030043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21316166" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -2571,8 +2562,6 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Captures" order="6" weight="0.25" />
       <window_info id="Capture Tool" order="7" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -2586,8 +2575,8 @@
       <window_info anchor="bottom" id="Logcat" order="10" weight="0.32969698" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Python Console" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -2597,6 +2586,8 @@
       <window_info anchor="right" id="Gradle" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="SciView" order="9" />
+      <window_info anchor="right" id="Database" order="10" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2604,13 +2595,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/d7cf0849881f20593c5dc01d010d522b/jars/classes.jar!/android/support/v7/widget/RecyclerView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/d7cf0849881f20593c5dc01d010d522b/jars/classes.jar!/android/support/v7/widget/RecyclerView.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
