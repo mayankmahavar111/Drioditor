@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ML Template</title>
+        <!-- Latest compiled and minified CSS -->
+        {% load static %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'ide/form.css' %}" >
+        <link rel="stylesheet" href="{% static 'ide/codemirror/lib/codemirror.css' %}" >
+        <script src="{% static 'ide/form.js' %}"></script>
+        <script src="{% static 'ide/codemirror/lib/codemirror.js' %}"></script>
+        <script src="{% static 'ide/codemirror/mode/python/python.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body >
+        <div class="container">
+            <div class="imagebg"></div>
+            <div class="row " style="margin-top: 50px">
+                <div class="col-md-12 form-container">
+                    <h2>ML Template</h2>
+                    <p> Please provide required details below: </p>
+                    <form role="form" method="post" id="ml_recommendation" action="run">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="name"> Please select one of the available ML Template : </label>
+                                <select class="ml_template_code" id="ml_template_code" name="ml_template">
+                                    <option value="naive" name="naive">Naive Bayes</option>
+                                    <option value="knn" name="knn">K-Nearest Neighbors (KNN)</option>
+                                    <option value="svm" name="svm">Support Vector Machine (SVM)</option>
+                                    <option value="mlp" name="mlp">Multi-layer Perceptron (MLP)</option>
+                                    <option value="dt" name="dt">Decision Tree</option>
+                                    <option value="lr" name="lr">Linear Regression</option>
+                                    <option value="kmc" name="kmc">K-means Clustering</option>
+                                    <option value="pca" name="pca">Principle Component Analysis (PCA)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="name"> Dataset URL (Google Drive)</label>
+                                <input type="text" class="form-control" id="drive_url" name="drive_url" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="name"> Dataset Name</label>
+                                <input type="text" class="form-control" id="dataset_name" name="dataset_name" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="name"> Email</label>
+                                <input type="text" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="comments"> Pre-Processing Code</label>
+                                <textarea class="form-control" type="textarea" name="pre_process_code" id="pre_process_code" placeholder="Your Comments"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <button type="submit" class="btn btn-lg btn-warning btn-block"  >RUN </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="success_message" style="width:100%; height:100%; display:none; "> <h3>Posted your feedback successfully!</h3> </div>
+                    <div id="error_message" style="width:100%; height:100%; display:none; "> <h3>Error</h3> Sorry there was an error sending your form. </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+  var editor = CodeMirror.fromTextArea(pre_process_code, {
+    lineNumbers: true,
+      mode: 'text/x-python',
+  });
+</script>
+<script>
+$(document).ready(function(){
+  $(".ml_template_code").change(function(){
+    $(this).css("background-color", "#D6D6FF");
+    var conceptName = $('#ml_template_code').find(":selected").val();
+    var naive="def naive(dataset):\n" +
+        "    f=open('{}'.format(dataset),'r')\n" +
+        "    data=f.readlines()[1:]\n" +
+        "    temp=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        temp.append(data[i].split(',')[:-1])\n" +
+        "\n" +
+        "    X=np.array(temp)\n" +
+        "    X = X.astype(np.float)\n" +
+        "    Y=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        Y.append(data[i].split(',')[-1])\n" +
+        "\n" +
+        "    clf=naive_bayes.GaussianNB()\n" +
+        "    clf.fit(X,Y)\n" +
+        "    pred=clf.predict(X)\n" +
+        "    cm=confusion_matrix(Y,pred)\n" +
+        "\n" +
+        "    tp=cm[0][0]\n" +
+        "    fp=cm[0][1]\n" +
+        "    fn=cm[1][0]\n" +
+        "    tn=cm[1][1]\n" +
+        "\n" +
+        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
+        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
+        "\n" +
+        "    return accuracy,tnr,tpr\n";
+    var knn="def knn(dataset):\n" +
+        "    f=open('{}'.format(dataset),'r')\n" +
+        "    data=f.readlines()[1:]\n" +
+        "    temp=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        temp.append(data[i].split(',')[:-1])\n" +
+        "\n" +
+        "    X=np.array(temp)\n" +
+        "    X = X.astype(np.float)\n" +
+        "    Y=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        Y.append(data[i].split(',')[-1])\n" +
+        "\n" +
+        "    clf=neighbors.KNeighborsClassifier()\n" +
+        "    clf.fit(X,Y)\n" +
+        "    pred=clf.predict(X)\n" +
+        "    cm=confusion_matrix(Y,pred)\n" +
+        "\n" +
+        "    #print(cm)\n" +
+        "\n" +
+        "    tp=cm[0][0]\n" +
+        "    fp=cm[0][1]\n" +
+        "    fn=cm[1][0]\n" +
+        "    tn=cm[1][1]\n" +
+        "\n" +
+        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
+        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
+        "\n" +
+        "    return accuracy,tnr,tpr\n";
+    var svm="def SVM(dataset):\n" +
+        "    f=open('{}'.format(dataset),'r')\n" +
+        "    data=f.readlines()[1:]\n" +
+        "    temp=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        temp.append(data[i].split(',')[:-1])\n" +
+        "\n" +
+        "    X=np.array(temp)\n" +
+        "    X = X.astype(np.float)\n" +
+        "    Y=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        Y.append(data[i].split(',')[-1])\n" +
+        "\n" +
+        "    clf=svm.LinearSVC()\n" +
+        "    clf.fit(X,Y)\n" +
+        "    pred=clf.predict(X)\n" +
+        "    cm=confusion_matrix(Y,pred)\n" +
+        "\n" +
+        "    tp=cm[0][0]\n" +
+        "    fp=cm[0][1]\n" +
+        "    fn=cm[1][0]\n" +
+        "    tn=cm[1][1]\n" +
+        "\n" +
+        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
+        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
+        "\n" +
+        "    return accuracy,tnr,tpr\n";
+    var nn="def nn(dataset):\n" +
+        "    f=open('{}'.format(dataset),'r')\n" +
+        "    data=f.readlines()[1:]\n" +
+        "    temp=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        temp.append(data[i].split(',')[:-1])\n" +
+        "\n" +
+        "    X=np.array(temp)\n" +
+        "    X = X.astype(np.float)\n" +
+        "    Y=[]\n" +
+        "\n" +
+        "    for i in range(len(data)):\n" +
+        "        Y.append(data[i].split(',')[-1])\n" +
+        "\n" +
+        "    clf=neural_network.MLPClassifier()\n" +
+        "    clf.fit(X,Y)\n" +
+        "    pred=clf.predict(X)\n" +
+        "    cm=confusion_matrix(Y,pred)\n" +
+        "\n" +
+        "    tp=cm[0][0]\n" +
+        "    fp=cm[0][1]\n" +
+        "    fn=cm[1][0]\n" +
+        "    tn=cm[1][1]\n" +
+        "\n" +
+        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
+        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
+        "\n" +
+        "    return accuracy,tnr,tpr\n";
+    var dt="";
+    var lr="";
+    var kmc="";
+    var pca="";
+    if (conceptName == 'naive')
+        editor.setValue(naive);
+    else if (conceptName=='knn')
+        editor.setValue(knn);
+    else if (conceptName=='svm')
+        editor.setValue(svm);
+    else if (conceptName=='mlp')
+        editor.setValue(nn);
+    else if (conceptName=='dt')
+        editor.setValue(dt);
+    else if (conceptName=='lr')
+        editor.setValue(lr);
+    else if (conceptName=='kmc')
+        editor.setValue(kmc);
+    else if (conceptName=='pca')
+        editor.setValue(pca);
+  });
+});
+</script>
