@@ -1,29 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ML Recommendation</title>
-        <!-- Latest compiled and minified CSS -->
-        {% load static %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'ide/form.css' %}" >
-        <link rel="stylesheet" href="{% static 'ide/codemirror/lib/codemirror.css' %}" >
-        <script src="{% static 'ide/form.js' %}"></script>
-        <script src="{% static 'ide/codemirror/lib/codemirror.js' %}"></script>
-        <script src="{% static 'ide/codemirror/mode/python/python.js' %}"></script>
-    </head>
-    <body >
+{% include 'ide/main_page.html' %}
+{% block body %}
         <div class="container">
             <div class="imagebg"></div>
-            <div class="row " style="margin-top: 50px">
+            <div class="row " style="margin-top: 30px">
                 <div class="col-md-12 form-container">
-                    <h2>ML Recommendation</h2>
+                    <h2 style="padding-top: 30px">ML Recommendation</h2>
                     <p> Please provide required details below: </p>
                     <form role="form" method="post" id="ml_recommendation" action="run">
                         {% csrf_token %}
@@ -484,8 +465,6 @@ if __name__ == '__main__':
                 </div>
             </div>
         </div>
-    </body>
-</html>
 <script>
   var editor = CodeMirror.fromTextArea(pre_process_code, {
     lineNumbers: true,
@@ -493,3 +472,4 @@ if __name__ == '__main__':
       autoCloseBrackets: true,
   });
 </script>
+{% endblock %}

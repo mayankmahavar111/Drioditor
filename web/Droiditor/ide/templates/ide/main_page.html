@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block title %}
+        <title>Droiditor</title>
+        {% endblock %}
+        <!-- Latest compiled and minified CSS -->
+        {% load static %}
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'ide/form.css' %}" >
+        <link rel="stylesheet" href="{% static 'ide/codemirror/lib/codemirror.css' %}" >
+        <script src="{% static 'ide/form.js' %}"></script>
+        <script src="{% static 'ide/codemirror/lib/codemirror.js' %}"></script>
+        <script src="{% static 'ide/codemirror/mode/python/python.js' %}"></script>
+    </head>
+    <body >
+        <header class="p-3  sticky-top">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-warning shadow rounded" role="navigation">
+        <a href="/ide/" class="navbar-brand">Droiditor</a>
+        <button type="button" name="button" class="navbar-toggler" data-toggle="collapse" data-target="#ResponsiveCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <div class="collapse navbar-collapse" id="ResponsiveCollapse">
+            <ul class="navbar-nav ml-auto">
+
+              <li class="nav-item">
+                <a href="/ide/" class="nav-link">IDE</a>
+              </li>
+              <li class="nav-item">
+                <a href="/ide/ml_recommendation" class="nav-link">ML Recommendation</a>
+              </li>
+              <li class="nav-item">
+                <a href="/ide/ml_template" class="nav-link">ML Templates</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">About Us</a>
+              </li>
+            </ul>
+          </div>
+      </nav>
+  </header>
+        {% block body %}
+        {% endblock %}
+  </div>
+    </body>
+</html>

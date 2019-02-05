@@ -2,6 +2,11 @@ from django.shortcuts import render, render_to_response, redirect
 
 # Create your views here.
 
+def main_page(request):
+    template = 'ide/main_page.html'
+    return render(request,template)
+
+
 def ml_recommendation_view(request):
     template = 'ide/ml_recommendation_form.html'
     return render(request, template)

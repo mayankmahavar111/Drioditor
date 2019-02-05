@@ -1,30 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ML Template</title>
-        <!-- Latest compiled and minified CSS -->
-        {% load static %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'ide/form.css' %}" >
-        <link rel="stylesheet" href="{% static 'ide/codemirror/lib/codemirror.css' %}" >
-        <script src="{% static 'ide/form.js' %}"></script>
-        <script src="{% static 'ide/codemirror/lib/codemirror.js' %}"></script>
-        <script src="{% static 'ide/codemirror/mode/python/python.js' %}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    </head>
-    <body >
+{% include 'ide/main_page.html' %}
+{% block body %}
         <div class="container">
             <div class="imagebg"></div>
-            <div class="row " style="margin-top: 50px">
+            <div class="row " style="margin-top: 30px">
                 <div class="col-md-12 form-container">
-                    <h2>ML Template</h2>
+                    <h2 style="padding-top: 30px">ML Template</h2>
                     <p> Please provide required details below: </p>
                     <form role="form" method="post" id="ml_recommendation" action="run">
                         {% csrf_token %}
@@ -236,3 +216,4 @@ $(document).ready(function(){
   });
 });
 </script>
+{% endblock %}
