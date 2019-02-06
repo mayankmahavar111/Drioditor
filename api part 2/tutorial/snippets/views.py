@@ -21,7 +21,7 @@ def mail(email,y):
 
     msg = EmailMessage(
         subject=subject,
-        body="Recommendation report of the provided dataset is attached below.",
+        body="Recommendation report of the provided dataset is attached below. THIS IS AN AUTOMATED MESSAGE - PLEASE DO NOT REPLY DIRECTLY TO THIS EMAIL",
         from_email=from_email,
         to=to_email
     )
