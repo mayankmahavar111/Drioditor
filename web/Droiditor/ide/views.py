@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response, redirect
-import urllib.request
+import urllib.request, requests
 import json
 
 
@@ -13,15 +13,14 @@ def postRequest(url,name,email,code):
         'emailid' : email,
         'code' : code
     }
-    myurl = "http://0.0.0.0:8000/recommendation/"
-    req = urllib.request.Request(myurl)
-    req.add_header('Content-Type', 'application/json; charset=utf-8')
-    jsondata = json.dumps(data)
-    jsondataasbytes = jsondata.encode('utf-8')  # needs to be bytes
-    req.add_header('Content-Length', len(jsondataasbytes))
-    print(jsondataasbytes)
-    response = urllib.request.urlopen(req, jsondataasbytes)
-    return response
+
+    print("Hello World")
+    try:
+        r = requests.post('http://0.0.0.0:9000/recommendation/',data=json.dumps(data))
+        print(r.status_code)
+    except Exception as e:
+        print(e)
+    return
 
 
 def main_page(request):
@@ -52,6 +51,6 @@ def ml_template_run(request):
         dataset_name=request.POST.get('dataset_name')
         email=request.POST.get('email')
         pre_process_code=request.POST.get('pre_process_code')
-        print (drive_url+'\n'+dataset_name+'\n'+email+'\n'+pre_process_code)
         postRequest(url=drive_url,name=dataset_name,email=email,code=pre_process_code)
-        return redirect('ml_template')
+        print(drive_url + '\n' + dataset_name + '\n' + email + '\n' + pre_process_code)
+        #return redirect('ml_template')
