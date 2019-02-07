@@ -167,3 +167,9 @@ def nn(dataset):
     tpr=round(float(tp)/float(tp+fn),4)
 
     return accuracy,tnr,tpr
+
+if __name__ == '__main__':
+    filename='data/iris.csv'
+    accuracy, tnr, tpr = naive('{}'.format(filename))
+    print(accuracy, tnr , tpr)
+

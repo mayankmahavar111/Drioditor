@@ -100,7 +100,12 @@ $(document).ready(function(){
         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
         "\n" +
-        "    return accuracy,tnr,tpr\n";
+        "    return accuracy,tnr,tpr\n" +
+        "if __name__ == '__main__':\n"+
+        "\tfilename='data/iris.csv' "+
+        "\taccuracy, tnr, tpr = naive('{}'.format(filename))"+
+        "\tprint(accuracy, tnr , tpr)";
+
     var knn="def knn(dataset):\n" +
         "    f=open('{}'.format(dataset),'r')\n" +
         "    data=f.readlines()[1:]\n" +
@@ -132,7 +137,11 @@ $(document).ready(function(){
         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
         "\n" +
-        "    return accuracy,tnr,tpr\n";
+        "    return accuracy,tnr,tpr\n" +
+        "if __name__ == '__main__':\n"+
+        "\tfilename='data/iris.csv' "+
+        "\taccuracy, tnr, tpr = knn('{}'.format(filename))"+
+        "\tprint(accuracy, tnr , tpr)";
     var svm="def SVM(dataset):\n" +
         "    f=open('{}'.format(dataset),'r')\n" +
         "    data=f.readlines()[1:]\n" +
@@ -162,7 +171,11 @@ $(document).ready(function(){
         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
         "\n" +
-        "    return accuracy,tnr,tpr\n";
+        "    return accuracy,tnr,tpr\n"+
+        "if __name__ == '__main__':\n"+
+        "\tfilename='data/iris.csv' "+
+        "\taccuracy, tnr, tpr = SVM('{}'.format(filename))"+
+        "\tprint(accuracy, tnr , tpr)";
     var nn="def nn(dataset):\n" +
         "    f=open('{}'.format(dataset),'r')\n" +
         "    data=f.readlines()[1:]\n" +
@@ -192,7 +205,11 @@ $(document).ready(function(){
         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
         "\n" +
-        "    return accuracy,tnr,tpr\n";
+        "    return accuracy,tnr,tpr\n" +
+        "if __name__ == '__main__':\n"+
+        "\tfilename='data/iris.csv' "+
+        "\taccuracy, tnr, tpr = nn('{}'.format(filename))"+
+        "\tprint(accuracy, tnr , tpr)";
     var dt="";
     var lr="";
     var kmc="";

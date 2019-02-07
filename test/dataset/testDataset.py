@@ -250,3 +250,6 @@ if __name__ == '__main__':
     sns.heatmap(correlation,xticklabels=newColumn,yticklabels=newColumn)
     plt.savefig('data/test.jpg')
     details(data,df,newColumn,'data/test.jpg')
+
+
+

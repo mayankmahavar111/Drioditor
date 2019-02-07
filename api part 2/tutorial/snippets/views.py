@@ -71,34 +71,32 @@ def downloadDataset(url,name):
 
 @api_view(['POST'])
 def recommendation(request,format=None):
-    print("Inside Recommendation")
+    print("Inside Recommendation",request.method , request.method == "POST")
     if request.method == "POST":
+        print("Hello World")
+        data=request.data
+        name = data['name']
+        code = data['code']
+        emailid= data['emailid']
+        url=data['url']
+        temp=  downloadDataset(url,name)
+        if temp!=True:
+            return Response(temp, status=status.HTTP_400_BAD_REQUEST)
+        f=open('testRecommendation.py','r')
+        temp=f.readlines()
 
-        serializer =RecommendataionSerializer(data=request.data)
-        if serializer.is_valid():
-            data=request.data
-            name = data['name']
-            code = data['code']
-            emailid= data['emailid']
-            url=data['url']
-            temp=  downloadDataset(url,name)
-            if temp!=True:
-                return Response(temp, status=status.HTTP_400_BAD_REQUEST)
-            f=open('testRecommendation.py','r')
-            temp=f.readlines()
+        f=open('mlrecommendation.py','w')
+        for x in temp:
+            f.write(x+'\n')
+        f.write('\n'+code)
 
-            f=open('mlrecommendation.py','w')
-            for x in temp:
-                f.write(x+'\n')
-            f.write('\n'+code)
+        f.close()
 
-            f.close()
+        os.system('python mlRecommendation.py')
+        mail(emailid,code)
 
-            os.system('python mlRecommendation.py')
-            mail(emailid,code)
-
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data, status=status.HTTP_201_CREATED)
+    return Response("Erorr", status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
 def snippet_list(request , format=None):

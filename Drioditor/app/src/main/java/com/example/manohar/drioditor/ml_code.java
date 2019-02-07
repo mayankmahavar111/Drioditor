@@ -155,7 +155,7 @@ public class ml_code extends Activity {
                     try {
 
                         String msg= input_code.getText().toString();
-                        URL url = new URL("http://10.0.2.2:8000/recommendation/");
+                        URL url = new URL("http://172.20.10.13:8000/recommendation/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -164,11 +164,13 @@ public class ml_code extends Activity {
                         conn.setDoOutput(true);
                         conn.setDoInput(true);
 
+                        Bundle values = getIntent().getExtras();
+
                         JSONObject jsonParam = new JSONObject();
                         jsonParam.put("code" , msg);
-                        jsonParam.put("name" , "iris");
-                        jsonParam.put("emailid","mayankmahavar111@gmail.com");
-                        jsonParam.put("url" , "https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N");
+                        jsonParam.put("name" , values.getString("dataset_name"));
+                        jsonParam.put("emailid",values.getString("report_gmail"));
+                        jsonParam.put("url" , values.getString("url"));
 
 
                         Log.i("JSON", jsonParam.toString());
