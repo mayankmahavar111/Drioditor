@@ -55,7 +55,7 @@ public class template extends Activity {
                         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
                         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    return accuracy,tnr,tpr"+);
+                        "    return accuracy,tnr,tpr");
                 break;
             case 2:
                 out.setText("def knn(dataset):\n" +
