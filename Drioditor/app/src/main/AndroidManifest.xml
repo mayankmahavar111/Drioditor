@@ -38,7 +38,8 @@
         <activity
             android:name=".template"
             android:label="@string/title_activity_template" />
-        <activity android:name=".SettingsPrefActivity"></activity>
+        <activity android:name=".SettingsPrefActivity" />
+        <activity android:name=".pdf_viewer"></activity>
     </application>
 
 </manifest>
