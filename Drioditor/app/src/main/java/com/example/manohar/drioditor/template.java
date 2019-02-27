@@ -55,7 +55,15 @@ public class template extends Activity {
                         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
                         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
+<<<<<<< HEAD
                         "    return accuracy,tnr,tpr");
+=======
+                        "    return accuracy,tnr,tpr\n\n"+
+                        "if __name__ == '__main__':\n"+
+                        "    filename='data/iris.csv' \n"+
+                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
+                        "    print(accuracy, tnr , tpr)");
+>>>>>>> 16d369319cddb60a4790ee6d73c871ba46c4dcfd
                 break;
             case 2:
                 out.setText("def knn(dataset):\n" +
@@ -97,7 +105,11 @@ public class template extends Activity {
                         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
                         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    return accuracy,tnr,tpr");
+                        "    return accuracy,tnr,tpr\n\n"+
+                        "if __name__ == '__main__':\n"+
+                        "    filename='data/iris.csv' \n"+
+                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
+                        "    print(accuracy, tnr , tpr)");
                 break;
             case 3:
                 out.setText("def SVM(dataset):\n" +
@@ -129,7 +141,11 @@ public class template extends Activity {
                         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
                         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    return accuracy,tnr,tpr");
+                        "    return accuracy,tnr,tpr\n\n"+
+                        "if __name__ == '__main__':\n"+
+                        "    filename='data/iris.csv' \n"+
+                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
+                        "    print(accuracy, tnr , tpr)");
                 break;
             case 4:
                 out.setText("def nn(dataset):\n" +
@@ -161,7 +177,11 @@ public class template extends Activity {
                         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
                         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    return accuracy,tnr,tpr");
+                        "    return accuracy,tnr,tpr\n\n"+
+                        "if __name__ == '__main__':\n"+
+                        "    filename='data/iris.csv' \n"+
+                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
+                        "    print(accuracy, tnr , tpr)");
                 break;
             case 5:
                 out.setText("Under Construction");
