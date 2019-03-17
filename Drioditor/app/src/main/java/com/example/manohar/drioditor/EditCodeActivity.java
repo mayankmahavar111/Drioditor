@@ -20,6 +20,8 @@ import com.example.manohar.drioditor.db.codeDB;
 import com.example.manohar.drioditor.db.codeDao;
 import com.example.manohar.drioditor.model.codes;
 
+import net.cryptobrewery.syntaxview.SyntaxView;
+
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -37,7 +39,7 @@ import java.util.Random;
 
 public class EditCodeActivity extends AppCompatActivity {
     private codeDao dao;
-    private EditText input_code;
+    private SyntaxView input_code;
     private codes temp;
     public static final String CODE_EXTRA_Key="code_id";
     public TextView out ;
@@ -62,6 +64,25 @@ public class EditCodeActivity extends AppCompatActivity {
 
         out = (TextView) findViewById(R.id.textView2);
         input_code=findViewById(R.id.input_code);
+        //this will set the color of Code Text background
+        input_code.setBgColor("#2b2b2b");
+        //this will set the color of strings between " "
+        input_code.setPrintStatmentsColor("#6a8759");
+        //this will set the default code text color other than programming keywords!
+        input_code.setCodeTextColor("#ffffff");
+        //this will set programming keywords color like String,int,for,etc...
+        input_code.setKeywordsColor("#cc7832");
+        //this will set the numbers color in code | ex: return 0; 0 will be colored
+        input_code.setNumbersColor("#4a85a3");
+        //this will set the line number view background color at left
+        input_code.setRowNumbersBgColor("#2b2b2b");
+        //this will set the color of numbers in the line number view at left
+        input_code.setRowNumbersColor("#cc7832");
+        //this will set color of Annotations like super,@Nullable,etc ....
+        input_code.setAnnotationsColor("#1932F3");
+        //this will set special characters color like ;
+        input_code.setSpecialCharsColor("#cc7832");
+
         dao = codeDB.getInstance(this).code_dao();
         final String[] output = {"Unable to get result"};
 
@@ -69,7 +90,7 @@ public class EditCodeActivity extends AppCompatActivity {
         if(getIntent().getExtras()!=null){
             int id=getIntent().getExtras().getInt(CODE_EXTRA_Key,0);
             temp=dao.getCodeById(id);
-            input_code.setText(temp.getCodeText());
+            input_code.getCode().setText(temp.getCodeText());
         }
         else
             input_code.setFocusable(true);
@@ -140,7 +161,8 @@ public class EditCodeActivity extends AppCompatActivity {
     }
 
     private void createMsg(final int random){
-        String msg= input_code.getText().toString();
+        input_code.checkMyCode();
+        String msg= input_code.getCode().getText().toString();
         if (msg.isEmpty() )
             Toast.makeText(EditCodeActivity.this, "Nothing to compile and run", Toast.LENGTH_SHORT).show();
         else{
@@ -152,7 +174,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     //Get Method
                     try {
 
-                        String msg= input_code.getText().toString();
+                        String msg= input_code.getCode().getText().toString();
                         URL url = new URL("http://172.20.10.13:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -325,7 +347,7 @@ public class EditCodeActivity extends AppCompatActivity {
     }
 
     public void onSaveCode(){
-        String text=input_code.getText().toString();
+        String text=input_code.getCode().getText().toString();
         if(!text.isEmpty()){
             long date=new Date().getTime();
             if(temp==null){

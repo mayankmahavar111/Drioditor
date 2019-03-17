@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
         iDrawerItems.add(new PrimaryDrawerItem().withName("Codes").withIcon(R.drawable.ic_code_black_24dp));
         iDrawerItems.add(new PrimaryDrawerItem().withName("ML Recommendation").withIcon(R.drawable.ic_code_black_24dp));
         iDrawerItems.add(new PrimaryDrawerItem().withName("ML Template").withIcon(R.drawable.ic_code_black_24dp));
+        iDrawerItems.add(new PrimaryDrawerItem().withName("PDF Reports").withIcon(R.drawable.ic_code_black_24dp));
 
         List<IDrawerItem> stickyItems=new ArrayList<>();
         SwitchDrawerItem switchDrawerItem=new SwitchDrawerItem()
@@ -369,40 +370,23 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
                 break;
             case 3:
                 open_dialog_activity();
-
-                /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                Activity a = (Activity) getActivity();
-                LayoutInflater inflater = a.getLayoutInflater();
-
-                builder.setView(inflater.inflate(R.layout.dialog_link, null));
-
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        EditText text_url=(EditText) findViewById(R.id.drive_url);
-                        String url=text_url.getText().toString();
-                        //Log.i("url",url);
-                        openActivity();
-
-                    }
-                });
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();*/
-
                 break;
             case 4:
                 open_ml_template_activity();
+                break;
+            case 5:
+                open_pdf_viewer_activity();
+                break;
             default:
                 break;
         }
 
         return false;
+    }
+
+    private void open_pdf_viewer_activity() {
+        Intent intent=new Intent(this,pdf_viewer.class);
+        startActivity(intent);
     }
 
     private void open_settings_activity() {
