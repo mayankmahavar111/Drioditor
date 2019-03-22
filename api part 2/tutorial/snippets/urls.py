@@ -8,5 +8,6 @@ urlpatterns = [
     url('snippets/(?P<pk>[0-9]{1,10})/$', views.snippet_detail),
     url('result/(?P<pk>[0-9]{1,100000})/$', views.result),
     url('recommendation/$',views.recommendation),
+    url('fetch/$',views.fetch),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

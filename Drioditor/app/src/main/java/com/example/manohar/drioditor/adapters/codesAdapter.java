@@ -44,7 +44,7 @@ public class codesAdapter extends RecyclerView.Adapter<codesAdapter.codeHolder> 
     public void onBindViewHolder(@NonNull codeHolder codeHolder, int i) {
          final codes code=getCode(i);
          if (code!=null){
-             codeHolder.codeText.setText(code.getCodeText());
+             codeHolder.codeText.setText(code.getCodeName());
              codeHolder.codeDate.setText(CodeUtils.dateFromLong(code.getCodeDate()));
              codeHolder.itemView.setOnClickListener(new View.OnClickListener() {
                  @Override

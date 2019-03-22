@@ -25,7 +25,7 @@ def mail(email,y):
         from_email=from_email,
         to=to_email
     )
-    msg.attach_file('data/output.pdf')
+    msg.attach_file('data/{}-{}.pdf'.format(email,y))
     msg.attach_file('mlrecommendation.py')
     msg.send(fail_silently=False)
     """
@@ -75,8 +75,8 @@ def recommendation(request,format=None):
     if request.method == "POST":
         print("Hello World")
         data=request.data
-        name = data['name']
-        code = data['code']
+        name = str(data['name'])
+        code = str(data['code'])
         emailid= data['emailid']
         url=data['url']
         temp=  downloadDataset(url,name)
@@ -93,7 +93,8 @@ def recommendation(request,format=None):
         f.close()
 
         os.system('python mlRecommendation.py')
-        mail(emailid,code)
+        os.rename('data/output.pdf','data/{}-{}.pdf'.format(emailid,name))
+        mail(emailid,name)
 
         return Response(data, status=status.HTTP_201_CREATED)
     return Response("Erorr", status=status.HTTP_400_BAD_REQUEST)
@@ -157,3 +158,13 @@ def result(request, pk, format=None):
         res=os.popen("python temp.py").read()
         print(res)
         return Response('{}'.format(res))
+
+
+
+@api_view(['GET'])
+def fetch(request):
+    with open('data/mayankmahavar111@gmail.com-iris.pdf', 'rb') as report:
+        return Response(
+            report.read(),
+            headers={'Content-Disposition': 'attachment; filename="file.pdf"'},
+            content_type='application/pdf')

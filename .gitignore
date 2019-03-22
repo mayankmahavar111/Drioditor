@@ -3,3 +3,8 @@ Drioditor/.idea/misc.xml
 
 Drioditor/.idea/
 Drioditor/api part 2/env/
+*.so
+*.so
+*.so
+test/envmac/lib/python3.6/site-packages/tensorflow/python/_pywrap_tensorflow_internal.so
+*.so
