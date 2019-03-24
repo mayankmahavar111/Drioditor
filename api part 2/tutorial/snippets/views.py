@@ -142,6 +142,23 @@ def snippet_detail(request, pk , format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+def LanguageDetection(code):
+    f=open('G:\\major\\Drioditor\\test/test.txt','w')
+    f.write(str(code))
+    f.close()
+    command=os.path.join('G:\\major\\Drioditor','test/env3/Scripts/python -m guesslang -a -i G:\\major\\Drioditor\\test\\test.txt')
+    print(command)
+    resu=os.popen(command).read()
+    return resu.split(" ")[-1].lower()
+
+
+@api_view(['GET'])
+def test(request):
+    res=LanguageDetection("for i in range(5) : print('Hello world')")
+    print(res)
+    return Response("Success")
+
+
 @api_view(['GET'])
 def result(request, pk, format=None):
     print("Inside result")
@@ -152,10 +169,28 @@ def result(request, pk, format=None):
     if request.method == 'GET':
         serializer = SnippetSerializer(snippet)
         code=serializer.data['code']
-        f=open('temp.py','w')
-        f.write(str(code))
-        f.close()
-        res=os.popen("python temp.py").read()
+        res=LanguageDetection(code)
+        print(res)
+        if res =='python':
+            f=open('temp.py','w')
+            f.write(str(code))
+            f.close()
+            res = os.popen("python temp.py").read()
+        elif res == 'java':
+            filename=(code.split("class")[-1]).split('{')[0]
+            f=open('{}.java'.format(filename),'w')
+            f.write(str(code))
+            f.close()
+            os.system('javac {}.java'.format(filename))
+            res = os.popen("java {}".format(filename)).read()
+        else:
+            f=open('temp.c','w')
+            f.write(str(code))
+            f.close()
+            os.system('gcc temp.c')
+            res = os.popen("./a.out").read()
+
+
         print(res)
         return Response('{}'.format(res))
 

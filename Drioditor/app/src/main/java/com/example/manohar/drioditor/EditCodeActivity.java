@@ -51,6 +51,7 @@ public class EditCodeActivity extends AppCompatActivity {
     public TextView out ;
     public String result;
     public int random;
+    //public EditText editText;
     Handler handler ;
     private final int REQ_CODE_SPEECH_INPUT = 100;
 
@@ -79,6 +80,7 @@ public class EditCodeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         out = (TextView) findViewById(R.id.textView2);
+        //editText = (EditText)findViewById(R.id.input_code);
         input_code=findViewById(R.id.input_code);
         //this will set the color of Code Text background
         input_code.setBgColor("#2b2b2b");
@@ -191,7 +193,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     try {
 
                         String msg= input_code.getCode().getText().toString();
-                        URL url = new URL("http://172.20.10.13:8000/snippets/");
+                        URL url = new URL("http://10.0.2.2:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -226,7 +228,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     StringBuffer response = new StringBuffer();
                     String id = Integer.toString(random);
                     try {
-                        url = new URL("http://172.20.10.13:8000/result/"+id+"/");
+                        url = new URL("http://10.0.2.2:8000/result/"+id+"/");
                     } catch (MalformedURLException e) {
                         throw new IllegalArgumentException("invalid url");
                     }
@@ -411,7 +413,85 @@ public class EditCodeActivity extends AppCompatActivity {
 
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    input_code.getCode().setText(result.get(0));
+
+                    String abc= result.get(0).toString();
+
+                    Log.i("voice" ,abc);
+
+                    String[] test = abc.split(" ",0);
+                    Log.i("voice" ,test.toString());
+
+                    String msg= input_code.getCode().getText().toString();
+                    int cursorPosition = input_code.getCode().getSelectionStart();
+                    String out="";
+                    String temp;
+                    switch (test[0]){
+                        case "up":
+                                input_code.getCode().setSelection(0);
+                            break;
+
+                        case "down" :
+                            input_code.getCode().setSelection(input_code.getCode().getText().length());
+                            break;
+                        case "move":
+                            input_code.getCode().setSelection(Integer.parseInt(test[1]));
+                            break;
+                        case "replace":
+
+                            out =msg.replace(test[1],test[2]);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            break;
+
+                        case "remove":
+                            out =msg.replace(test[1],"");
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            break;
+
+                        case "enter":
+                            temp="";
+                            for (int i=1;i<test.length;i++)
+                                temp= temp+test[i]+" ";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+
+                        case "press":
+                            if (test[1].equalsIgnoreCase("enter")){
+                                temp="\n";
+                                for(int i=0;i<cursorPosition;i++)
+                                    out+=msg.charAt(i);
+                                out +=temp;
+
+                                for(int i=cursorPosition;i<msg.length();i++)
+                                    out+=msg.charAt(i);
+                                Log.i("voice 1",out);
+                                input_code.getCode().setText(out);
+                                input_code.getCode().setSelection(cursorPosition+temp.length());
+                        }
+                        break;
+                        default:
+                            temp="";
+                            for (int i=0;i<test.length;i++)
+                                temp= temp+test[i]+" ";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                    }
                 }
                 break;
             }
