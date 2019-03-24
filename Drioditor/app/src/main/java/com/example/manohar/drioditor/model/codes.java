@@ -6,13 +6,16 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName =  "codes")
-public class codes {
+public
+class codes {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo(name = "code")
     private String codeText;
     @ColumnInfo(name = "date")
     private Long codeDate;
+    @ColumnInfo(name = "name")
+    private String codeName;
 
     @Ignore
     private boolean checked=false;
@@ -20,9 +23,10 @@ public class codes {
     public codes() {
     }
 
-    public codes(String codeText, Long codeDate) {
+    public codes(String codeText, Long codeDate, String codeName) {
         this.codeText = codeText;
         this.codeDate = codeDate;
+        this.codeName = codeName;
     }
 
     public String getCodeText() {
@@ -31,6 +35,14 @@ public class codes {
 
     public void setCodeText(String codeText) {
         this.codeText = codeText;
+    }
+
+    public String getCodeName() {
+        return codeName;
+    }
+
+    public void setCodeName(String codeName) {
+        this.codeName = codeName;
     }
 
     public Long getCodeDate() {

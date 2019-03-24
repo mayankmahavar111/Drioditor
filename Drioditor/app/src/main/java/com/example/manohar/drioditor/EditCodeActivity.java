@@ -2,6 +2,7 @@ package com.example.manohar.drioditor;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -9,8 +10,10 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,6 +57,8 @@ public class EditCodeActivity extends AppCompatActivity {
     //public EditText editText;
     Handler handler ;
     private final int REQ_CODE_SPEECH_INPUT = 100;
+    static String fileName="";
+    private String tempFileName="";
 
 
     @Override
@@ -369,19 +374,50 @@ public class EditCodeActivity extends AppCompatActivity {
         if(!text.isEmpty()){
             long date=new Date().getTime();
             if(temp==null){
-                temp=new codes(text,date);
+                fileName=openFileNameDialog(0);
+                Log.i("real",""+fileName);
+                temp=new codes(text,date,fileName);
                 dao.insertCode(temp);
             }
             else {
                 temp.setCodeText(text);
                 temp.setCodeDate(date);
+                temp.setCodeName(fileName);
                 dao.updateCode(temp);
-
             }
 
-            finish();
+            //finish();
         }
 
+    }
+
+    public String openFileNameDialog(final int flag){
+        if (flag==0){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Title");
+
+
+            final EditText input = new EditText(this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    tempFileName = input.getText().toString();
+                    Log.i("test",""+tempFileName);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+        }
+        return tempFileName;
     }
 
     private void promptSpeechInput() {
