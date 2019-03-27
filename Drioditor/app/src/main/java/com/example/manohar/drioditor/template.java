@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.TextView;
 
+import net.cryptobrewery.syntaxview.SyntaxView;
+
 public class template extends Activity {
 
     @Override
@@ -23,10 +25,10 @@ public class template extends Activity {
             //Log.i("values",""+ml_algorithm+""+url+""+dataset_name+""+report_gmail);
         }
 
-        TextView out=findViewById(R.id.input_ml_code);
+        SyntaxView out=findViewById(R.id.input_ml_code);
         switch (ml_algorithm){
             case 1:
-                out.setText("def naive(dataset):\n" +
+                out.getCode().setText("def naive(dataset):\n" +
                         "    f=open('{}'.format(dataset),'r')\n" +
                         "    data=f.readlines()[1:]\n" +
                         "    temp=[]\n" +
@@ -55,18 +57,14 @@ public class template extends Activity {
                         "    tnr=round(float(tn)/float(tn+fp),4)\n" +
                         "    tpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-<<<<<<< HEAD
-                        "    return accuracy,tnr,tpr");
-=======
                         "    return accuracy,tnr,tpr\n\n"+
                         "if __name__ == '__main__':\n"+
                         "    filename='data/iris.csv' \n"+
                         "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
                         "    print(accuracy, tnr , tpr)");
->>>>>>> 16d369319cddb60a4790ee6d73c871ba46c4dcfd
                 break;
             case 2:
-                out.setText("def knn(dataset):\n" +
+                out.getCode().setText("def knn(dataset):\n" +
                         "    f=open('{}'.format(dataset),'r')\n" +
                         "    data=f.readlines()[1:]\n" +
                         "    temp=[]\n" +
@@ -112,7 +110,7 @@ public class template extends Activity {
                         "    print(accuracy, tnr , tpr)");
                 break;
             case 3:
-                out.setText("def SVM(dataset):\n" +
+                out.getCode().setText("def SVM(dataset):\n" +
                         "    f=open('{}'.format(dataset),'r')\n" +
                         "    data=f.readlines()[1:]\n" +
                         "    temp=[]\n" +
@@ -148,7 +146,7 @@ public class template extends Activity {
                         "    print(accuracy, tnr , tpr)");
                 break;
             case 4:
-                out.setText("def nn(dataset):\n" +
+                out.getCode().setText("def nn(dataset):\n" +
                         "    f=open('{}'.format(dataset),'r')\n" +
                         "    data=f.readlines()[1:]\n" +
                         "    temp=[]\n" +
@@ -184,19 +182,19 @@ public class template extends Activity {
                         "    print(accuracy, tnr , tpr)");
                 break;
             case 5:
-                out.setText("Under Construction");
+                 out.getCode().setText("Under Construction");
                 break;
             case 6:
-                out.setText("Under Construction");
+                out.getCode().setText("Under Construction");
                 break;
             case 7:
-                out.setText("Under Construction");
+                out.getCode().setText("Under Construction");
                 break;
             case 8:
-                out.setText("Under Construction");
+                out.getCode().setText("Under Construction");
                 break;
             default:
-                out.setText("Please select one of the given ML Algorithm");
+                out.getCode().setText("Please select one of the given ML Algorithm");
                 break;
         }
 

@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.cryptobrewery.syntaxview.SyntaxView;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -39,8 +41,8 @@ public class ml_code extends Activity {
             String report_gmail=values.getString("report_gmail");
             Log.i("values",url+""+dataset_name);
         }
-        TextView out = (TextView) findViewById(R.id.input_ml_code);
-        out.setText("def updateDataset(check, data):\n" +
+        SyntaxView out = findViewById(R.id.input_ml_code);
+        out.getCode().setText("def updateDataset(check, data):\n" +
                 "    temp=[]\n" +
                 "    for i in range(len(check)):\n" +
                 "        if check[i] == 1:\n" +
