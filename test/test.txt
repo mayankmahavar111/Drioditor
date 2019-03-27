@@ -1,20 +1,17 @@
-num = 407
+public class Fibonacci {
 
-# take input from the user
-# num = int(input("Enter a number: "))
+    public static void main(String[] args) {
 
-# prime numbers are greater than 1
-if num > 1:
-   # check for factors
-   for i in range(2,num):
-       if (num % i) == 0:
-           print(num,"is not a prime number")
-           print(i,"times",num//i,"is",num)
-           break
-   else:
-       print(num,"is a prime number")
-       
-# if input number is less than
-# or equal to 1, it is not prime
-else:
-   print(num,"is not a prime number")
+        int n = 10, t1 = 0, t2 = 1;
+        System.out.print("First " + n + " terms: ");
+
+        for (int i = 1; i <= n; ++i)
+        {
+            System.out.print(t1 + " + ");
+
+            int sum = t1 + t2;
+            t1 = t2;
+            t2 = sum;
+        }
+    }
+}
