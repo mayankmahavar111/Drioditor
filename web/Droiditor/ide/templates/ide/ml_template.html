@@ -26,25 +26,25 @@
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label for="name"> Dataset URL (Google Drive)</label>
-                                <input type="text" class="form-control" id="drive_url" name="drive_url" required>
+                                <input type="text" class="form-control" id="drive_url" name="drive_url" value="{{ drive_url }}" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label for="name"> Dataset Name</label>
-                                <input type="text" class="form-control" id="dataset_name" name="dataset_name" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 form-group">
-                                <label for="name"> Email</label>
-                                <input type="text" class="form-control" id="email" name="email" required>
+                                <input type="text" class="form-control" id="dataset_name" name="dataset_name" value="{{ dataset_name }}" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label for="comments"> Pre-Processing Code</label>
-                                <textarea class="form-control" type="textarea" name="pre_process_code" id="pre_process_code" placeholder="Your Comments"></textarea>
+                                <textarea class="form-control" type="textarea" name="pre_process_code" id="pre_process_code" placeholder="Your Comments">{{ pre_process_code }}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="name"> Output</label>
+                                <textarea rows="4" class="form-control" id="output" name="output">{{ data }}</textarea>
                             </div>
                         </div>
                         <div class="row">

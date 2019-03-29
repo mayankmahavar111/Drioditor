@@ -62,11 +62,13 @@ def ml_template(request):
         print (pre_process_code)
         #postRequest(url=drive_url,name=dataset_name,email=email,code=pre_process_code)
         title =random.randint(0,1000)
+        print (title)
         postTemplate(pre_process_code,title)
-        r=request.get(url='http://127.0.0.1:8000/result/{}'.format(title))
-        data=r.json()
-        print(data)
-        return redirect('ml_template')
+        #r=request.get(url='http://127.0.0.1:8000/snippets/result/{}'.format(title))
+        #data=r.json()
+        #print(data)
+        data="output"
+        return render(request,'ide/ml_template.html',{'drive_url':drive_url,'dataset_name':dataset_name,'pre_process_code':pre_process_code,'data':data})
     else:
         template = 'ide/ml_template.html'
         return render(request, template)
