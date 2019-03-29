@@ -101,7 +101,7 @@ def recommendation(request,format=None):
 
 @api_view(['GET', 'POST'])
 def snippet_list(request , format=None):
-    #print("inside list")
+    print("inside list")
     if request.method == 'GET':
         snippets = Snippet.objects.all()
         serializer = SnippetSerializer(snippets, many=True)

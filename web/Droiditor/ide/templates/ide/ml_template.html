@@ -6,7 +6,7 @@
                 <div class="col-md-12 form-container">
                     <h2 style="padding-top: 30px">ML Template</h2>
                     <p> Please provide required details below: </p>
-                    <form role="form" method="post" id="ml_recommendation" action="run">
+                    <form role="form" method="post" id="ml_recommendation" action="">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-sm-12 form-group">
@@ -71,7 +71,19 @@ $(document).ready(function(){
   $(".ml_template_code").change(function(){
     $(this).css("background-color", "#D6D6FF");
     var conceptName = $('#ml_template_code').find(":selected").val();
-    var naive="def naive(dataset):\n" +
+    var naive=
+        "from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+        "def downloadDataset(url,name):\n"+
+        "   try:\n"+
+        "       id = url.split('=')[-1]\n"+
+        "       gdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+        "       return True\n"+
+        "   except Exception as e:\n"+
+        "       return e\n"+
+        "def naive(dataset):\n" +
+        "   temp=  downloadDataset(url,name)\n"+
+        "   if temp!=True:\n"+
+        "       return \n"+
         "    f=open('{}'.format(dataset),'r')\n" +
         "    data=f.readlines()[1:]\n" +
         "    temp=[]\n" +
@@ -106,7 +118,19 @@ $(document).ready(function(){
         "\taccuracy, tnr, tpr = naive('{}'.format(filename))"+
         "\tprint(accuracy, tnr , tpr)";
 
-    var knn="def knn(dataset):\n" +
+    var knn=
+        "from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+        "def downloadDataset(url,name):\n"+
+        "   try:\n"+
+        "       id = url.split('=')[-1]\n"+
+        "       gdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+        "       return True\n"+
+        "   except Exception as e:\n"+
+        "       return e\n"+
+        "def knn(dataset):\n" +
+        "   temp=  downloadDataset(url,name)\n"+
+        "   if temp!=True:\n"+
+        "       return \n"+
         "    f=open('{}'.format(dataset),'r')\n" +
         "    data=f.readlines()[1:]\n" +
         "    temp=[]\n" +
@@ -142,7 +166,19 @@ $(document).ready(function(){
         "\tfilename='data/iris.csv' "+
         "\taccuracy, tnr, tpr = knn('{}'.format(filename))"+
         "\tprint(accuracy, tnr , tpr)";
-    var svm="def SVM(dataset):\n" +
+    var svm=
+        "from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+        "def downloadDataset(url,name):\n"+
+        "   try:\n"+
+        "       id = url.split('=')[-1]\n"+
+        "       gdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+        "       return True\n"+
+        "   except Exception as e:\n"+
+        "       return e\n"+
+        "def SVM(dataset):\n" +
+        "   temp=  downloadDataset(url,name)\n"+
+        "   if temp!=True:\n"+
+        "       return \n"+
         "    f=open('{}'.format(dataset),'r')\n" +
         "    data=f.readlines()[1:]\n" +
         "    temp=[]\n" +
@@ -176,7 +212,19 @@ $(document).ready(function(){
         "\tfilename='data/iris.csv' "+
         "\taccuracy, tnr, tpr = SVM('{}'.format(filename))"+
         "\tprint(accuracy, tnr , tpr)";
-    var nn="def nn(dataset):\n" +
+    var nn=
+        "from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+        "def downloadDataset(url,name):\n"+
+        "   try:\n"+
+        "       id = url.split('=')[-1]\n"+
+        "       gdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+        "       return True\n"+
+        "   except Exception as e:\n"+
+        "       return e\n"+
+        "def nn(dataset):\n" +
+        "   temp=  downloadDataset(url,name)\n"+
+        "   if temp!=True:\n"+
+        "       return \n"+
         "    f=open('{}'.format(dataset),'r')\n" +
         "    data=f.readlines()[1:]\n" +
         "    temp=[]\n" +
