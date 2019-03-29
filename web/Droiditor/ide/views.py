@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, redirect
 import urllib.request, requests
 import json,random
 
@@ -56,7 +56,6 @@ def ml_template(request):
     if request.method == 'POST':
         drive_url=request.POST.get('drive_url')
         dataset_name=request.POST.get('dataset_name')
-        email=request.POST.get('email')
         pre_process_code=request.POST.get('pre_process_code')
         pre_process_code=pre_process_code.replace('temp=  downloadDataset(url,name)','temp=  downloadDataset("{}","{}")'.format(drive_url,dataset_name))
         pre_process_code=pre_process_code.replace('data/iris.csv','data/{}.csv'.format(dataset_name))
