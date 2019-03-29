@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.Looper;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -365,17 +366,15 @@ public class EditCodeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
         if(id==R.id.save_code)
-            onSaveCode();
+            openFileNameDialog();
         return super.onOptionsItemSelected(item);
     }
 
-    public void onSaveCode(){
+    public void onSaveCode(String fileName){
         String text=input_code.getCode().getText().toString();
         if(!text.isEmpty()){
             long date=new Date().getTime();
             if(temp==null){
-                fileName=openFileNameDialog(0);
-                Log.i("real",""+fileName);
                 temp=new codes(text,date,fileName);
                 dao.insertCode(temp);
             }
@@ -385,27 +384,27 @@ public class EditCodeActivity extends AppCompatActivity {
                 temp.setCodeName(fileName);
                 dao.updateCode(temp);
             }
-
-            //finish();
         }
 
     }
 
-    public String openFileNameDialog(final int flag){
-        if (flag==0){
+    public String openFileNameDialog(){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Title");
+            builder.setTitle("Enter the File name");
 
 
             final EditText input = new EditText(this);
             input.setInputType(InputType.TYPE_CLASS_TEXT);
+            if (temp!=null)
+            input.setText(temp.getCodeName());
             builder.setView(input);
 
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     tempFileName = input.getText().toString();
-                    Log.i("test",""+tempFileName);
+                    onSaveCode(tempFileName);
+                    finish();
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -416,7 +415,7 @@ public class EditCodeActivity extends AppCompatActivity {
             });
 
             builder.show();
-        }
+        Log.i("test",""+tempFileName);
         return tempFileName;
     }
 

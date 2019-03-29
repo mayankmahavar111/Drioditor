@@ -7,7 +7,7 @@ import android.content.Context;
 
 import com.example.manohar.drioditor.model.codes;
 
-@Database(entities = codes.class, version = 1)
+@Database(entities = codes.class, version = 1, exportSchema = false)
 public abstract class codeDB extends RoomDatabase {
     public abstract codeDao code_dao();
     private static codeDB instance;

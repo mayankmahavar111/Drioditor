@@ -20,6 +20,7 @@ class codes {
     @Ignore
     private boolean checked=false;
 
+    @Ignore
     public codes() {
     }
 
