@@ -8,9 +8,19 @@ from snippets.models import Snippet,recommend
 from snippets.serializers import SnippetSerializer,RecommendataionSerializer
 from django.conf import settings
 from django.core.mail import EmailMessage
-import os
+import os,platform
 from google_drive_downloader import GoogleDriveDownloader as gdd
 
+
+flag=0
+
+@api_view(['GET'])
+def getFlag(request):
+    return Response('{}'.format(flag))
+
+def setFlag(value):
+    global flag
+    flag=value
 
 def mail(email,y):
     subject='recommendation'
@@ -143,11 +153,16 @@ def snippet_detail(request, pk , format=None):
 
 
 def LanguageDetection(code):
-    location="/Users/manohar/Documents/Projects/Majorproject/Drioditor"
+    if platform.system == 'windows':
+        location= "G:/major/Drioditor"
+        envname='env3'
+    else:
+        location="/Users/manohar/Documents/Projects/Majorproject/Drioditor"
+        envname='envmac'
     f=open('{}/test/test.txt'.format(location),'w')
     f.write(str(code))
     f.close()
-    command=os.path.join('{}'.format(location),'test/envmac/bin/python -m guesslang -a -i {}/test/test.txt'.format(location))
+    command=os.path.join('{}'.format(location),'test/{}/bin/python -m guesslang -a -i {}/test/test.txt'.format(envname,location))
     print(command)
     resu=os.popen(command).read().split('\n')[0]
     return resu.split(" ")[-1].lower()
@@ -162,6 +177,7 @@ def test(request):
 
 @api_view(['GET'])
 def result(request, pk, format=None):
+    setFlag(1)
     print("Inside result")
     try:
         snippet = Snippet.objects.get(title=str(pk))
@@ -198,6 +214,7 @@ def result(request, pk, format=None):
 
 
         print(res)
+        setFlag(0)
         return Response('{}'.format(res))
 
 
