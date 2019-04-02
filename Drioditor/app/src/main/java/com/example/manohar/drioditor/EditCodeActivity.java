@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -164,19 +165,20 @@ public class EditCodeActivity extends AppCompatActivity {
     private void showText( ){
         out.setText("");
         try{
-            //out.setSingleLine(false);
-            //out.setInputType(out.getInputType()|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
+            out.setMovementMethod(new ScrollingMovementMethod());
+
+            result=result.replaceAll("^\"|\"$", "");
             String temp="";
-            /*
-            String res[] = result.split(System.getProperty("line.separator"));
+            String res[] = result.split("@#");
             for(int i=0 ; i<res.length; i++ ) {
                 Log.i("result",res[i]+'\n');
-                temp = temp + res[i]+" <br />";
+                temp = temp + res[i]+" <br />"+"";
             }
             Log.i("result",temp);
             Log.i("result", String.valueOf(Html.fromHtml(temp)));
-            out.setText(Html.fromHtml(temp));*/
+            out.setText(Html.fromHtml(temp));
+            /*
             int i=0;
             while(i<result.length()){
                 temp="";
@@ -190,7 +192,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 i=i+2;
 
                 out.append(temp+'\n');
-            }
+            }*/
         }catch (Exception e){
             e.printStackTrace();
         }
