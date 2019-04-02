@@ -300,7 +300,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 URL url;
                 StringBuffer response = new StringBuffer();
                 try {
-                    url = new URL("http://10.52.34.12:8000/result/"+id+"/");
+                    url = new URL("http://10.0.2.2:8000/result/"+id+"/");
                 } catch (MalformedURLException e) {
                     throw new IllegalArgumentException("invalid url");
                 }

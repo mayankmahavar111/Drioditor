@@ -143,12 +143,13 @@ def snippet_detail(request, pk , format=None):
 
 
 def LanguageDetection(code):
-    f=open('G:\\major\\Drioditor\\test/test.txt','w')
+    location="/Users/manohar/Documents/Projects/Majorproject/Drioditor"
+    f=open('{}/test/test.txt'.format(location),'w')
     f.write(str(code))
     f.close()
-    command=os.path.join('G:\\major\\Drioditor','test/env3/Scripts/python -m guesslang -a -i G:\\major\\Drioditor\\test\\test.txt')
+    command=os.path.join('{}'.format(location),'test/envmac/bin/python -m guesslang -a -i {}/test/test.txt'.format(location))
     print(command)
-    resu=os.popen(command).read()
+    resu=os.popen(command).read().split('\n')[0]
     return resu.split(" ")[-1].lower()
 
 
@@ -169,8 +170,11 @@ def result(request, pk, format=None):
     if request.method == 'GET':
         serializer = SnippetSerializer(snippet)
         code=serializer.data['code']
+        print "it worked"
         res=LanguageDetection(code)
+        print "it is working"
         print(res)
+        print res=='python'
         if res =='python':
             f=open('temp.py','w')
             f.write(str(code))
@@ -178,6 +182,8 @@ def result(request, pk, format=None):
             res = os.popen("python temp.py").read()
         elif res == 'java':
             filename=(code.split("class")[-1]).split('{')[0]
+            filename=filename.replace(" ","")
+            print filename
             f=open('{}.java'.format(filename),'w')
             f.write(str(code))
             f.close()
