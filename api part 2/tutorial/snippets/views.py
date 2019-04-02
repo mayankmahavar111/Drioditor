@@ -215,7 +215,7 @@ def result(request, pk, format=None):
                 os.system('gcc temp.c')
                 res = os.popen("./a.out").read()
 
-            res= res.replace("\r\n","\\\\").replace("\r","\\\\").replace("\n","\\\\")
+            res= res.replace("\r\n","@#").replace("\r","@#").replace("\n","@#")
             print(res)
             setFlag(0)
             return Response('{}'.format(res))
