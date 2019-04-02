@@ -14,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -149,17 +150,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     getMsg( Integer.toString(random) );
                     */
                     //handler.postDelayed(r, 100000);
-                out.setText("");
-                try{
-                    String res [] = result.split("\n");
-                    for(int i=0 ; i<res.length; i++ ) {
-                        out.append(res[i]);
-                        out.append(System.getProperty("line.separator"));
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                showText();
 
             }
         });
@@ -168,6 +159,42 @@ public class EditCodeActivity extends AppCompatActivity {
 
     }
 
+
+
+    private void showText( ){
+        out.setText("");
+        try{
+            //out.setSingleLine(false);
+            //out.setInputType(out.getInputType()|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+            String temp="";
+            /*
+            String res[] = result.split(System.getProperty("line.separator"));
+            for(int i=0 ; i<res.length; i++ ) {
+                Log.i("result",res[i]+'\n');
+                temp = temp + res[i]+" <br />";
+            }
+            Log.i("result",temp);
+            Log.i("result", String.valueOf(Html.fromHtml(temp)));
+            out.setText(Html.fromHtml(temp));*/
+            int i=0;
+            while(i<result.length()){
+                temp="";
+                while (result.charAt(i)!=92 && result.charAt(i+1)!='n' ){
+                    temp=temp+result.charAt(i);
+
+                    Log.i("result",temp);
+                    i=i+1;
+
+                }
+                i=i+2;
+
+                out.append(temp+'\n');
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     private class Msg extends AsyncTask{
 
@@ -182,6 +209,108 @@ public class EditCodeActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void getRes(final int random){
+        URL url;
+        StringBuffer response = new StringBuffer();
+        String id = Integer.toString(random);
+        try {
+            url = new URL("http://10.53.92.80:8000/result/"+id+"/");
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException("invalid url");
+        }
+
+        HttpURLConnection conn = null;
+        try {
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(false);
+            conn.setDoInput(true);
+            conn.setUseCaches(false);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+            //conn.setRequestProperty("Accept","application/form");
+
+            Log.i("check" , "worked till 1");
+            // handle the response
+            int status = conn.getResponseCode();
+            Log.i("check" , "worked till 2");
+            if (status != 200) {
+                throw new IOException("get failed with error code " + status);
+            } else {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                Log.i("check" , "worked till 3");
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+
+            //Here is your json in string format
+            String responseJSON = response.toString();
+            //Log.i("check" , responseJSON);
+            result = responseJSON;
+
+            Log.i("check" , result);
+        }
+    }
+
+    private int getFlag(){
+        int flag =1;
+        while (flag!=1) {
+            URL url;
+            StringBuffer response = new StringBuffer();
+            try {
+                url = new URL("http://10.53.92.80:8000/flag/");
+            } catch (MalformedURLException e) {
+                throw new IllegalArgumentException("invalid url");
+            }
+            HttpURLConnection conn = null;
+            try {
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setDoOutput(false);
+                conn.setDoInput(true);
+                conn.setUseCaches(false);
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+                //conn.setRequestProperty("Accept","application/form");
+
+                Log.i("check", "worked till 1");
+                // handle the response
+                int status = conn.getResponseCode();
+                Log.i("check", "worked till 2");
+                if (status != 200) {
+                    throw new IOException("get failed with error code " + status);
+                } else {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    Log.i("check", "worked till 3");
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
+
+                //Here is your json in string format
+                String responseJSON = response.toString();
+                //Log.i("check" , responseJSON);
+                flag = Integer.parseInt(responseJSON);
+            }
+        }
+        return flag;
     }
 
     private void createMsg(final int random){
@@ -199,7 +328,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     try {
 
                         String msg= input_code.getCode().getText().toString();
-                        URL url = new URL("http://10.0.2.2:8000/snippets/");
+                        URL url = new URL("http://10.53.92.80:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -230,54 +359,10 @@ public class EditCodeActivity extends AppCompatActivity {
                     }
 
                     //Post Method
-                    URL url;
-                    StringBuffer response = new StringBuffer();
-                    String id = Integer.toString(random);
-                    try {
-                        url = new URL("http://10.0.2.2:8000/result/"+id+"/");
-                    } catch (MalformedURLException e) {
-                        throw new IllegalArgumentException("invalid url");
-                    }
 
-                    HttpURLConnection conn = null;
-                    try {
-                        conn = (HttpURLConnection) url.openConnection();
-                        conn.setDoOutput(false);
-                        conn.setDoInput(true);
-                        conn.setUseCaches(false);
-                        conn.setRequestMethod("GET");
-                        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-                        //conn.setRequestProperty("Accept","application/form");
+                    getRes(random);
+                    showText();
 
-                        Log.i("check" , "worked till 1");
-                        // handle the response
-                        int status = conn.getResponseCode();
-                        Log.i("check" , "worked till 2");
-                        if (status != 200) {
-                            throw new IOException("get failed with error code " + status);
-                        } else {
-                            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                            Log.i("check" , "worked till 3");
-                            String inputLine;
-                            while ((inputLine = in.readLine()) != null) {
-                                response.append(inputLine);
-                            }
-                            in.close();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        if (conn != null) {
-                            conn.disconnect();
-                        }
-
-                        //Here is your json in string format
-                        String responseJSON = response.toString();
-                        //Log.i("check" , responseJSON);
-                        result = responseJSON;
-
-                        Log.i("check" , result);
-                    }
                 }
             });
 
@@ -300,7 +385,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 URL url;
                 StringBuffer response = new StringBuffer();
                 try {
-                    url = new URL("http://10.0.2.2:8000/result/"+id+"/");
+                    url = new URL("http://10.53.92.80:8000/result/"+id+"/");
                 } catch (MalformedURLException e) {
                     throw new IllegalArgumentException("invalid url");
                 }

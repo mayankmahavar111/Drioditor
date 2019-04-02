@@ -81,7 +81,10 @@
             android:layout_marginBottom="0dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:singleLine="false"
             android:text="Display output here"
+
+
             tools:text="@tools:sample/lorem/random"
             />
 

@@ -153,16 +153,17 @@ def snippet_detail(request, pk , format=None):
 
 
 def LanguageDetection(code):
-    if platform.system == 'windows':
+    print platform.system()
+    if platform.system() == 'Windows':
         location= "G:/major/Drioditor"
-        envname='env3'
+        envname='env3/Scripts'
     else:
         location="/Users/manohar/Documents/Projects/Majorproject/Drioditor"
-        envname='envmac'
+        envname='envmac/bin'
     f=open('{}/test/test.txt'.format(location),'w')
     f.write(str(code))
     f.close()
-    command=os.path.join('{}'.format(location),'test/{}/bin/python -m guesslang -a -i {}/test/test.txt'.format(envname,location))
+    command=os.path.join('{}'.format(location),'test/{}/python -m guesslang -a -i {}/test/test.txt'.format(envname,location))
     print(command)
     resu=os.popen(command).read().split('\n')[0]
     return resu.split(" ")[-1].lower()
@@ -177,45 +178,51 @@ def test(request):
 
 @api_view(['GET'])
 def result(request, pk, format=None):
-    setFlag(1)
+
     print("Inside result")
     try:
         snippet = Snippet.objects.get(title=str(pk))
     except Snippet.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
-        serializer = SnippetSerializer(snippet)
-        code=serializer.data['code']
-        print "it worked"
-        res=LanguageDetection(code)
-        print "it is working"
-        print(res)
-        print res=='python'
-        if res =='python':
-            f=open('temp.py','w')
-            f.write(str(code))
-            f.close()
-            res = os.popen("python temp.py").read()
-        elif res == 'java':
-            filename=(code.split("class")[-1]).split('{')[0]
-            filename=filename.replace(" ","")
-            print filename
-            f=open('{}.java'.format(filename),'w')
-            f.write(str(code))
-            f.close()
-            os.system('javac {}.java'.format(filename))
-            res = os.popen("java {}".format(filename)).read()
-        else:
-            f=open('temp.c','w')
-            f.write(str(code))
-            f.close()
-            os.system('gcc temp.c')
-            res = os.popen("./a.out").read()
+        setFlag(1)
+        try:
+            serializer = SnippetSerializer(snippet)
+            code=serializer.data['code']
+            print "it worked"
+            res=LanguageDetection(code)
+            print "it is working"
+            print(res)
+            print res=='python'
+            if res =='python':
+                f=open('temp.py','w')
+                f.write(str(code))
+                f.close()
+                res = os.popen("python temp.py").read()
+            elif res == 'java':
+                filename=(code.split("class")[-1]).split('{')[0]
+                filename=filename.replace(" ","")
+                print filename
+                f=open('{}.java'.format(filename),'w')
+                f.write(str(code))
+                f.close()
+                os.system('javac {}.java'.format(filename))
+                res = os.popen("java {}".format(filename)).read()
+            else:
+                f=open('temp.c','w')
+                f.write(str(code))
+                f.close()
+                os.system('gcc temp.c')
+                res = os.popen("./a.out").read()
 
-
-        print(res)
-        setFlag(0)
-        return Response('{}'.format(res))
+            res= res.replace("\r\n","\\\\").replace("\r","\\\\").replace("\n","\\\\")
+            print(res)
+            setFlag(0)
+            return Response('{}'.format(res))
+        except Exception as e:
+            print(e)
+            setFlag(0)
+            return Response('{}'.format("Internal errors. Please check the api once."))
 
 
 
