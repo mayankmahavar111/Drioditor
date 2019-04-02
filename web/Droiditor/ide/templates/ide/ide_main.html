@@ -1,0 +1,41 @@
+{% include 'ide/main_page.html' %}
+{% block body %}
+            <div class="container">
+            <div class="imagebg"></div>
+            <div class="row " style="margin-top: 30px">
+                <div class="col-md-12 form-container">
+                    <h2 style="padding-top: 30px">Please write your code here</h2>
+                    <form role="form" method="post" id="ml_recommendation" action="">
+                        {% csrf_token %}
+                        <div class="row" style="border: solid 1px black">
+                            <div class="col-sm-12 form-group">
+                                <textarea class="form-control" type="textarea" name="pre_process_code" id="pre_process_code" placeholder="Your Comments">{{ pre_process_code }}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="name"> Output</label>
+                                <textarea rows="4" class="form-control" id="output" name="output">{{ data }}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <button type="submit" class="btn btn-lg btn-warning btn-block"  >RUN </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="success_message" style="width:100%; height:100%; display:none; "> <h3>Posted your feedback successfully!</h3> </div>
+                    <div id="error_message" style="width:100%; height:100%; display:none; "> <h3>Error</h3> Sorry there was an error sending your form. </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+  var editor = CodeMirror.fromTextArea(pre_process_code, {
+    lineNumbers: true,
+      mode: 'text/x-python',
+  });
+</script>
+        {% endblock %}
+
