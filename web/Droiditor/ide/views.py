@@ -35,7 +35,7 @@ def postTemplate(code,title):
     return
 
 def main_page(request):
-    template = 'ide/main_page.html'
+    template = 'ide/ide_main.html'
     return render(request,template)
 
 
