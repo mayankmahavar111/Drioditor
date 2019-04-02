@@ -76,3 +76,14 @@ def ml_template(request):
 def ml_template_run(request):
     template = 'ide/ml_recommendation_form.html'
 
+def ide_run(request):
+    if request.method=='POST':
+        code=request.POST.get('code')
+        title = random.randint(0, 1000)
+        postTemplate(code,title)
+        # r=request.get(url='http://127.0.0.1:8000/snippets/result/{}'.format(title))
+        # data=r.json()
+        # print(data)
+        data="output"
+        return render(request,'ide/ide_main.html',{'code':code,"data":data})
+

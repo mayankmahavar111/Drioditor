@@ -5,11 +5,11 @@
             <div class="row " style="margin-top: 30px">
                 <div class="col-md-12 form-container">
                     <h2 style="padding-top: 30px">Please write your code here</h2>
-                    <form role="form" method="post" id="ml_recommendation" action="">
+                    <form role="form" method="post" id="ml_recommendation" action="run/">
                         {% csrf_token %}
                         <div class="row" style="border: solid 1px black">
                             <div class="col-sm-12 form-group">
-                                <textarea class="form-control" type="textarea" name="pre_process_code" id="pre_process_code" placeholder="Your Comments">{{ pre_process_code }}</textarea>
+                                <textarea class="form-control" type="textarea" name="code" id="code">{{ code }}</textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -32,7 +32,7 @@
     </body>
 </html>
 <script>
-  var editor = CodeMirror.fromTextArea(pre_process_code, {
+  var editor = CodeMirror.fromTextArea(code, {
     lineNumbers: true,
       mode: 'text/x-python',
   });
