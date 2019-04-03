@@ -38,6 +38,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -600,6 +601,140 @@ public class template extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                    String abc= result.get(0).toString();
+
+                    Log.i("voice" ,abc);
+
+                    String[] test = abc.split(" ",0);
+                    Log.i("voice" ,test.toString());
+
+                    String msg= input_code.getCode().getText().toString();
+                    int cursorPosition = input_code.getCode().getSelectionStart();
+                    String out="";
+                    String temp;
+                    switch (test[0]){
+                        case "up":
+                            input_code.getCode().setSelection(0);
+                            break;
+
+                        case "down" :
+                            input_code.getCode().setSelection(input_code.getCode().getText().length());
+                            break;
+                        case "move":
+                            input_code.getCode().setSelection(Integer.parseInt(test[1]));
+                            break;
+                        case "replace":
+
+                            out =msg.replace(test[1],test[2]);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            break;
+
+                        case "remove":
+                            out =msg.replace(test[1],"");
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            break;
+
+                        case "enter":
+                            temp="";
+                            for (int i=1;i<test.length;i++)
+                                temp= temp+test[i]+" ";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+
+                        case "press":
+                            if (test[1].equalsIgnoreCase("enter")){
+                                temp="\n";
+                                for(int i=0;i<cursorPosition;i++)
+                                    out+=msg.charAt(i);
+                                out +=temp;
+
+                                for(int i=cursorPosition;i<msg.length();i++)
+                                    out+=msg.charAt(i);
+                                Log.i("voice 1",out);
+                                input_code.getCode().setText(out);
+                                input_code.getCode().setSelection(cursorPosition+temp.length());
+                            }
+
+                        case "save":
+                            openFileNameDialog();
+
+
+                            break;
+
+                        case "run":
+                            runCode();
+                            break;
+                        default:
+                            temp="";
+                            for (int i=0;i<test.length;i++)
+                                temp= temp+test[i]+" ";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                    }
+                }
+                break;
+            }
+
+        }
+    }
+
+    private void runCode(){
+        Toast.makeText(getApplicationContext(), "compile and run" , Toast.LENGTH_LONG).show();
+
+        final int min = 1;
+        final int max = 1000;
+        random = new Random().nextInt((max - min) + 1) + min;
+
+        Object [] objects;
+        objects = new Object[0];
+
+        Msg msg = new Msg();
+        msg.doInBackground(objects);
+
+                /*
+                msgPart2 msg2 = new msgPart2();
+                msg2.doInBackground(objects);*/
+
+                /*
+                createMsg(random);
+
+
+
+                try {
+                    getMsg( Integer.toString(random) );
+                    */
+        //handler.postDelayed(r, 100000);
+        showText();
     }
 
 }
