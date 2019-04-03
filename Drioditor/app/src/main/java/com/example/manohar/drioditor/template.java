@@ -127,6 +127,7 @@ public class template extends AppCompatActivity {
         }
 
         SyntaxView out=findViewById(R.id.input_ml_code);
+
         switch (ml_algorithm){
             case 1:
                 out.getCode().setText("from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
@@ -138,7 +139,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def naive(dataset):\n" +
-                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -171,7 +172,7 @@ public class template extends AppCompatActivity {
                         "\n" +
                         "\treturn accuracy,tnr,tpr\n" +
                         "if __name__ == '__main__':\n"+
-                        "\tfilename='data/iris.csv' \n"+
+                        "\tfilename='data/"+values.getString("dataset_name")+".csv' \n"+
                         "\taccuracy, tnr, tpr = naive('{}'.format(filename))\n"+
                         "\tprint(accuracy, tnr , tpr)\n");
                 break;
@@ -185,7 +186,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def knn(dataset):\n" +
-                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -220,7 +221,7 @@ public class template extends AppCompatActivity {
                         "\n" +
                         "\treturn accuracy,tnr,tpr\n" +
                         "if __name__ == '__main__':\n"+
-                        "\tfilename='data/iris.csv' \n"+
+                        "\tfilename='data/"+values.getString("dataset_name")+".csv' \n"+
                         "\taccuracy, tnr, tpr = knn('{}'.format(filename))\n"+
                         "\tprint(accuracy, tnr , tpr)\n");
                 break;
@@ -234,7 +235,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def SVM(dataset):\n" +
-                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -267,7 +268,7 @@ public class template extends AppCompatActivity {
                         "\n" +
                         "\treturn accuracy,tnr,tpr\n"+
                         "if __name__ == '__main__':\n"+
-                        "\tfilename='data/iris.csv' \n"+
+                        "\tfilename='data/"+values.getString("dataset_name")+".csv' \n"+
                         "\taccuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
                         "\tprint(accuracy, tnr , tpr)\n");
                 break;
@@ -281,7 +282,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def nn(dataset):\n" +
-                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -314,7 +315,7 @@ public class template extends AppCompatActivity {
                         "\n" +
                         "\treturn accuracy,tnr,tpr\n" +
                         "if __name__ == '__main__':\n"+
-                        "\tfilename='data/iris.csv' \n"+
+                        "\tfilename='data/"+values.getString("dataset_name")+".csv' \n"+
                         "\taccuracy, tnr, tpr = nn('{}'.format(filename))\n"+
                         "\tprint(accuracy, tnr , tpr)\n");
                 break;
@@ -370,7 +371,8 @@ public class template extends AppCompatActivity {
     }
     private void createMsg(final int random){
         input_code.checkMyCode();
-        String msg= input_code.getCode().getText().toString();
+        String msg="import numpy as np\n"+"from sklearn import neighbors,svm,naive_bayes,neural_network\n"+"from sklearn.metrics import confusion_matrix\n";
+        msg+=input_code.getCode().getText().toString();
         if (msg.isEmpty() )
             Toast.makeText(template.this, "Nothing to compile and run", Toast.LENGTH_SHORT).show();
         else{
@@ -382,8 +384,15 @@ public class template extends AppCompatActivity {
                     //Get Method
                     try {
 
-                        String msg= input_code.getCode().getText().toString();
-                        URL url = new URL("http://10.53.92.80:8000/snippets/");
+
+                        String msg="import numpy as np\n"+"from sklearn import neighbors,svm,naive_bayes,neural_network\n"+"from sklearn.metrics import confusion_matrix\n";
+
+                        msg+= input_code.getCode().getText().toString();
+
+                        //msg=msg.replaceAll("temp=  downloadDataset(url,name)","temp=  downloadDataset('"+"https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N"+"','"+values.getString("dataset_name")+"')");
+                        //msg=msg.replaceAll("data/iris.csv","data/'"+values.getString("dataset_name")+".csv'");
+
+                        URL url = new URL("http://10.0.2.2:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -468,7 +477,7 @@ public class template extends AppCompatActivity {
         StringBuffer response = new StringBuffer();
         String id = Integer.toString(random);
         try {
-            url = new URL("http://10.53.92.80:8000/result/"+id+"/");
+            url = new URL("http://10.0.2.2:8000/result/"+id+"/");
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("invalid url");
         }
