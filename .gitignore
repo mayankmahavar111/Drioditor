@@ -8,3 +8,7 @@ Drioditor/api part 2/env/
 *.so
 test/envmac/lib/python3.6/site-packages/tensorflow/python/_pywrap_tensorflow_internal.so
 *.so
+api part 2/tutorial/temp.py
+test/test.txt
+api part 2/tutorial/temp.py
+api part 2/tutorial/db.sqlite3

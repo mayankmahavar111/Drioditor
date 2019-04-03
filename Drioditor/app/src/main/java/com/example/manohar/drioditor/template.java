@@ -625,7 +625,7 @@ public class template extends AppCompatActivity {
                     int cursorPosition = input_code.getCode().getSelectionStart();
                     String out="";
                     String temp;
-                    switch (test[0]){
+                    switch (test[0].toLowerCase()){
                         case "up":
                             input_code.getCode().setSelection(0);
                             break;
