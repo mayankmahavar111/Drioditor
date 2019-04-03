@@ -57,17 +57,6 @@
         android:hint="Dataset Name"
         android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/gmail_report"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-
-        android:paddingLeft="20dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
-
     <Button
         android:id="@+id/drive_submit"
         android:layout_width="wrap_content"

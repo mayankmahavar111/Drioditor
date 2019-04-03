@@ -1,6 +1,7 @@
 package com.example.manohar.drioditor;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -8,14 +9,23 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.manohar.drioditor.db.codeDB;
+import com.example.manohar.drioditor.db.codeDao;
+import com.example.manohar.drioditor.model.codes;
 
 import net.cryptobrewery.syntaxview.SyntaxView;
 
@@ -28,6 +38,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
@@ -36,14 +47,18 @@ public class template extends AppCompatActivity {
     public TextView out ;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     public int random;
+    private codes temp;
     public String result;
+    private codeDao dao;
+    static String fileName="";
+    private String tempFileName="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template);
         int ml_algorithm=0;
-        String url, dataset_name, report_gmail;
+        String url,dataset_name;
 
         FloatingActionButton compile = (FloatingActionButton) findViewById(R.id.compile);
         Toolbar toolbar=findViewById(R.id.edit_code_activity_toolbar);
@@ -81,6 +96,8 @@ public class template extends AppCompatActivity {
         input_code.setAnnotationsColor("#1932F3");
         //this will set special characters color like ;
         input_code.setSpecialCharsColor("#cc7832");
+
+        dao = codeDB.getInstance(this).code_dao();
 
         compile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +139,6 @@ public class template extends AppCompatActivity {
             ml_algorithm=values.getInt("ml_algorithm");
             url = values.getString("url");
             dataset_name=values.getString("dataset_name");
-            report_gmail=values.getString("report_gmail");
             //Log.i("values",""+ml_algorithm+""+url+""+dataset_name+""+report_gmail);
         }
 
@@ -521,6 +537,69 @@ public class template extends AppCompatActivity {
 
             Log.i("check" , result);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.edit_code_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.save_code)
+            openFileNameDialog();
+        return super.onOptionsItemSelected(item);
+    }
+
+    public String openFileNameDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter the File name");
+
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        if (temp!=null)
+            input.setText(temp.getCodeName());
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                tempFileName = input.getText().toString();
+                onSaveCode(tempFileName);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+        Log.i("test",""+tempFileName);
+        return tempFileName;
+    }
+
+    public void onSaveCode(String fileName){
+        String text=input_code.getCode().getText().toString();
+        if(!text.isEmpty()){
+            long date=new Date().getTime();
+            if(temp==null){
+                temp=new codes(text,date,fileName);
+                dao.insertCode(temp);
+            }
+            else {
+                temp.setCodeText(text);
+                temp.setCodeDate(date);
+                temp.setCodeName(fileName);
+                dao.updateCode(temp);
+            }
+        }
+
     }
 
 }

@@ -62,19 +62,16 @@ public class ml_template extends Activity implements OnItemSelectedListener{
                 String url=text_url.getText().toString();
                 EditText text_name=findViewById(R.id.dataset_name);
                 String dataset_name=text_name.getText().toString();
-                EditText gmail_report=findViewById(R.id.gmail_report);
-                String report_gmail=gmail_report.getText().toString();
-                openActivity(ml_algorithm,url,dataset_name,report_gmail);
+                openActivity(ml_algorithm,url,dataset_name);
             }
         });
     }
 
-    private void openActivity(int ml_algorithm,String url,String dataset_name,String report_gmail) {
+    private void openActivity(int ml_algorithm,String url,String dataset_name) {
         Intent intent=new Intent(this,template.class);
         intent.putExtra("ml_algorithm",ml_algorithm);
         intent.putExtra("url",url);
         intent.putExtra("dataset_name",dataset_name);
-        intent.putExtra("report_gmail",report_gmail);
         startActivity(intent);
     }
 
