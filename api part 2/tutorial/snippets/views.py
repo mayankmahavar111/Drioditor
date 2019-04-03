@@ -233,3 +233,4 @@ def fetch(request):
             report.read(),
             headers={'Content-Disposition': 'attachment; filename="file.pdf"'},
             content_type='application/pdf')
+
