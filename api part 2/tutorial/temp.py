@@ -9,7 +9,7 @@ def downloadDataset(url,name):
 		return True
 	except Exception as e:
 		return e
-def knn(dataset):
+def naive(dataset):
 	temp=  downloadDataset('https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N','iris')
 	if temp!=True:
 		return 
@@ -27,12 +27,10 @@ def knn(dataset):
 	for i in range(len(data)):
 		Y.append(data[i].split(',')[-1])
 
-	clf=neighbors.KNeighborsClassifier()
+	clf=naive_bayes.GaussianNB()
 	clf.fit(X,Y)
 	pred=clf.predict(X)
 	cm=confusion_matrix(Y,pred)
-
-	#print(cm)
 
 	tp=cm[0][0]
 	fp=cm[0][1]
@@ -46,5 +44,5 @@ def knn(dataset):
 	return accuracy,tnr,tpr
 if __name__ == '__main__':
 	filename='data/iris.csv' 
-	accuracy, tnr, tpr = knn('{}'.format(filename))
+	accuracy, tnr, tpr = naive('{}'.format(filename))
 	print(accuracy, tnr , tpr)
