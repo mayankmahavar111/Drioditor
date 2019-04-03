@@ -150,7 +150,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 try {
                     getMsg( Integer.toString(random) );
                     */
-                    //handler.postDelayed(r, 100000);
+                //handler.postDelayed(r, 100000);
                 showText();
 
             }
@@ -161,6 +161,35 @@ public class EditCodeActivity extends AppCompatActivity {
     }
 
 
+
+    private void runCode(){
+        Toast.makeText(getApplicationContext(), "compile and run" , Toast.LENGTH_LONG).show();
+
+        final int min = 1;
+        final int max = 1000;
+        random = new Random().nextInt((max - min) + 1) + min;
+
+        Object [] objects;
+        objects = new Object[0];
+
+        Msg msg = new Msg();
+        msg.doInBackground(objects);
+
+                /*
+                msgPart2 msg2 = new msgPart2();
+                msg2.doInBackground(objects);*/
+
+                /*
+                createMsg(random);
+
+
+
+                try {
+                    getMsg( Integer.toString(random) );
+                    */
+        //handler.postDelayed(r, 100000);
+        showText();
+    }
 
     private void showText( ){
         out.setText("");
@@ -599,7 +628,16 @@ public class EditCodeActivity extends AppCompatActivity {
                                 input_code.getCode().setText(out);
                                 input_code.getCode().setSelection(cursorPosition+temp.length());
                         }
-                        break;
+
+                        case "save":
+                                openFileNameDialog();
+
+
+                                break;
+
+                        case "run":
+                            runCode();
+                            break;
                         default:
                             temp="";
                             for (int i=0;i<test.length;i++)
