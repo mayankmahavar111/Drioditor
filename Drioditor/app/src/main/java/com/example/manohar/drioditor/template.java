@@ -392,7 +392,7 @@ public class template extends AppCompatActivity {
                         //msg=msg.replaceAll("temp=  downloadDataset(url,name)","temp=  downloadDataset('"+"https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N"+"','"+values.getString("dataset_name")+"')");
                         //msg=msg.replaceAll("data/iris.csv","data/'"+values.getString("dataset_name")+".csv'");
 
-                        URL url = new URL("http://10.0.2.2:8000/snippets/");
+                        URL url = new URL("http://10.53.78.42:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -477,7 +477,7 @@ public class template extends AppCompatActivity {
         StringBuffer response = new StringBuffer();
         String id = Integer.toString(random);
         try {
-            url = new URL("http://10.0.2.2:8000/result/"+id+"/");
+            url = new URL("http://10.53.78.42:8000/result/"+id+"/");
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("invalid url");
         }

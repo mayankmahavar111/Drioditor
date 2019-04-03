@@ -247,7 +247,7 @@ public class EditCodeActivity extends AppCompatActivity {
         StringBuffer response = new StringBuffer();
         String id = Integer.toString(random);
         try {
-            url = new URL("http://10.53.92.80:8000/result/"+id+"/");
+            url = new URL("http://10.53.78.42:8000/result/"+id+"/");
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("invalid url");
         }
@@ -299,7 +299,7 @@ public class EditCodeActivity extends AppCompatActivity {
             URL url;
             StringBuffer response = new StringBuffer();
             try {
-                url = new URL("http://10.53.92.80:8000/flag/");
+                url = new URL("http://10.53.78.42:8000/flag/");
             } catch (MalformedURLException e) {
                 throw new IllegalArgumentException("invalid url");
             }
@@ -359,7 +359,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     try {
 
                         String msg= input_code.getCode().getText().toString();
-                        URL url = new URL("http://10.53.92.80:8000/snippets/");
+                        URL url = new URL("http://10.53.78.42:8000/snippets/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -416,7 +416,7 @@ public class EditCodeActivity extends AppCompatActivity {
                 URL url;
                 StringBuffer response = new StringBuffer();
                 try {
-                    url = new URL("http://10.53.92.80:8000/result/"+id+"/");
+                    url = new URL("http://10.53.78.42:8000/result/"+id+"/");
                 } catch (MalformedURLException e) {
                     throw new IllegalArgumentException("invalid url");
                 }
@@ -576,7 +576,7 @@ public class EditCodeActivity extends AppCompatActivity {
                     int cursorPosition = input_code.getCode().getSelectionStart();
                     String out="";
                     String temp;
-                    switch (test[0]){
+                    switch (test[0].toLowerCase()){
                         case "up":
                                 input_code.getCode().setSelection(0);
                             break;
