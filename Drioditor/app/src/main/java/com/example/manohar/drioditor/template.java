@@ -28,158 +28,194 @@ public class template extends Activity {
         SyntaxView out=findViewById(R.id.input_ml_code);
         switch (ml_algorithm){
             case 1:
-                out.getCode().setText("def naive(dataset):\n" +
-                        "    f=open('{}'.format(dataset),'r')\n" +
-                        "    data=f.readlines()[1:]\n" +
-                        "    temp=[]\n" +
+                out.getCode().setText("from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+                        "def downloadDataset(url,name):\n"+
+                        "\ttry:\n"+
+                        "\t\tid = url.split('=')[-1]\n"+
+                        "\t\tgdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+                        "\t\treturn True\n"+
+                        "\texcept Exception as e:\n"+
+                        "\t\treturn e\n"+
+                        "def naive(dataset):\n" +
+                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\tif temp!=True:\n"+
+                        "\t\treturn \n"+
+                        "\tf=open('{}'.format(dataset),'r')\n" +
+                        "\tdata=f.readlines()[1:]\n" +
+                        "\ttemp=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        temp.append(data[i].split(',')[:-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\ttemp.append(data[i].split(',')[:-1])\n" +
                         "\n" +
-                        "    X=np.array(temp)\n" +
-                        "    X = X.astype(np.float)\n" +
-                        "    Y=[]\n" +
+                        "\tX=np.array(temp)\n" +
+                        "\tX = X.astype(np.float)\n" +
+                        "\tY=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        Y.append(data[i].split(',')[-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\tY.append(data[i].split(',')[-1])\n" +
                         "\n" +
-                        "    clf=naive_bayes.GaussianNB()\n" +
-                        "    clf.fit(X,Y)\n" +
-                        "    pred=clf.predict(X)\n" +
-                        "    cm=confusion_matrix(Y,pred)\n" +
+                        "\tclf=naive_bayes.GaussianNB()\n" +
+                        "\tclf.fit(X,Y)\n" +
+                        "\tpred=clf.predict(X)\n" +
+                        "\tcm=confusion_matrix(Y,pred)\n" +
                         "\n" +
-                        "    tp=cm[0][0]\n" +
-                        "    fp=cm[0][1]\n" +
-                        "    fn=cm[1][0]\n" +
-                        "    tn=cm[1][1]\n" +
+                        "\ttp=cm[0][0]\n" +
+                        "\tfp=cm[0][1]\n" +
+                        "\tfn=cm[1][0]\n" +
+                        "\ttn=cm[1][1]\n" +
                         "\n" +
-                        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
-                        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
-                        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
+                        "\taccuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+                        "\ttnr=round(float(tn)/float(tn+fp),4)\n" +
+                        "\ttpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    return accuracy,tnr,tpr\n\n"+
+                        "\treturn accuracy,tnr,tpr\n" +
                         "if __name__ == '__main__':\n"+
-                        "    filename='data/iris.csv' \n"+
-                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
-                        "    print(accuracy, tnr , tpr)");
+                        "\tfilename='data/iris.csv' \n"+
+                        "\taccuracy, tnr, tpr = naive('{}'.format(filename))\n"+
+                        "\tprint(accuracy, tnr , tpr)\n");
                 break;
             case 2:
-                out.getCode().setText("def knn(dataset):\n" +
-                        "    f=open('{}'.format(dataset),'r')\n" +
-                        "    data=f.readlines()[1:]\n" +
-                        "    temp=[]\n" +
+                out.getCode().setText("from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+                        "def downloadDataset(url,name):\n"+
+                        "\ttry:\n"+
+                        "\t\tid = url.split('=')[-1]\n"+
+                        "\t\tgdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+                        "\t\treturn True\n"+
+                        "\texcept Exception as e:\n"+
+                        "\t\treturn e\n"+
+                        "def knn(dataset):\n" +
+                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\tif temp!=True:\n"+
+                        "\t\treturn \n"+
+                        "\tf=open('{}'.format(dataset),'r')\n" +
+                        "\tdata=f.readlines()[1:]\n" +
+                        "\ttemp=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        temp.append(data[i].split(',')[:-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\ttemp.append(data[i].split(',')[:-1])\n" +
                         "\n" +
-                        "    X=np.array(temp)\n" +
-                        "    X = X.astype(np.float)\n" +
-                        "    Y=[]\n" +
+                        "\tX=np.array(temp)\n" +
+                        "\tX = X.astype(np.float)\n" +
+                        "\tY=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        Y.append(data[i].split(',')[-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\tY.append(data[i].split(',')[-1])\n" +
                         "\n" +
-                        "    #X_train,Y_train,X_test,Y_test=splitdataset(X,Y,0.70)\n" +
+                        "\tclf=neighbors.KNeighborsClassifier()\n" +
+                        "\tclf.fit(X,Y)\n" +
+                        "\tpred=clf.predict(X)\n" +
+                        "\tcm=confusion_matrix(Y,pred)\n" +
                         "\n" +
+                        "\t#print(cm)\n" +
                         "\n" +
-                        "    #print(Y[0])\n" +
-                        "    #print(len(X_train),len(Y_train),len(X_test),len(Y_test))\n" +
-                        "    #print(Y_train,Y_test)\n" +
-                        "    clf=neighbors.KNeighborsClassifier()\n" +
-                        "    clf.fit(X,Y)\n" +
-                        "    pred=clf.predict(X)\n" +
-                        "    #print(Y_test)\n" +
-                        "    #print(pred)\n" +
-                        "    cm=confusion_matrix(Y,pred)\n" +
+                        "\ttp=cm[0][0]\n" +
+                        "\tfp=cm[0][1]\n" +
+                        "\tfn=cm[1][0]\n" +
+                        "\ttn=cm[1][1]\n" +
                         "\n" +
-                        "    print(cm)\n" +
+                        "\taccuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+                        "\ttnr=round(float(tn)/float(tn+fp),4)\n" +
+                        "\ttpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    tp=cm[0][0]\n" +
-                        "    fp=cm[0][1]\n" +
-                        "    fn=cm[1][0]\n" +
-                        "    tn=cm[1][1]\n" +
-                        "\n" +
-                        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
-                        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
-                        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
-                        "\n" +
-                        "    return accuracy,tnr,tpr\n\n"+
+                        "\treturn accuracy,tnr,tpr\n" +
                         "if __name__ == '__main__':\n"+
-                        "    filename='data/iris.csv' \n"+
-                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
-                        "    print(accuracy, tnr , tpr)");
+                        "\tfilename='data/iris.csv' \n"+
+                        "\taccuracy, tnr, tpr = knn('{}'.format(filename))\n"+
+                        "\tprint(accuracy, tnr , tpr)\n");
                 break;
             case 3:
-                out.getCode().setText("def SVM(dataset):\n" +
-                        "    f=open('{}'.format(dataset),'r')\n" +
-                        "    data=f.readlines()[1:]\n" +
-                        "    temp=[]\n" +
+                out.getCode().setText("from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+                        "def downloadDataset(url,name):\n"+
+                        "\ttry:\n"+
+                        "\t\tid = url.split('=')[-1]\n"+
+                        "\t\tgdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+                        "\t\treturn True\n"+
+                        "\texcept Exception as e:\n"+
+                        "\t\treturn e\n"+
+                        "def SVM(dataset):\n" +
+                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\tif temp!=True:\n"+
+                        "\t\treturn \n"+
+                        "\tf=open('{}'.format(dataset),'r')\n" +
+                        "\tdata=f.readlines()[1:]\n" +
+                        "\ttemp=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        temp.append(data[i].split(',')[:-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\ttemp.append(data[i].split(',')[:-1])\n" +
                         "\n" +
-                        "    X=np.array(temp)\n" +
-                        "    X = X.astype(np.float)\n" +
-                        "    Y=[]\n" +
+                        "\tX=np.array(temp)\n" +
+                        "\tX = X.astype(np.float)\n" +
+                        "\tY=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        Y.append(data[i].split(',')[-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\tY.append(data[i].split(',')[-1])\n" +
                         "\n" +
-                        "    clf=svm.LinearSVC()\n" +
-                        "    clf.fit(X,Y)\n" +
-                        "    pred=clf.predict(X)\n" +
-                        "    cm=confusion_matrix(Y,pred)\n" +
+                        "\tclf=svm.LinearSVC()\n" +
+                        "\tclf.fit(X,Y)\n" +
+                        "\tpred=clf.predict(X)\n" +
+                        "\tcm=confusion_matrix(Y,pred)\n" +
                         "\n" +
-                        "    tp=cm[0][0]\n" +
-                        "    fp=cm[0][1]\n" +
-                        "    fn=cm[1][0]\n" +
-                        "    tn=cm[1][1]\n" +
+                        "\ttp=cm[0][0]\n" +
+                        "\tfp=cm[0][1]\n" +
+                        "\tfn=cm[1][0]\n" +
+                        "\ttn=cm[1][1]\n" +
                         "\n" +
-                        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
-                        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
-                        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
+                        "\taccuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+                        "\ttnr=round(float(tn)/float(tn+fp),4)\n" +
+                        "\ttpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    return accuracy,tnr,tpr\n\n"+
+                        "\treturn accuracy,tnr,tpr\n"+
                         "if __name__ == '__main__':\n"+
-                        "    filename='data/iris.csv' \n"+
-                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
-                        "    print(accuracy, tnr , tpr)");
+                        "\tfilename='data/iris.csv' \n"+
+                        "\taccuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
+                        "\tprint(accuracy, tnr , tpr)\n");
                 break;
             case 4:
-                out.getCode().setText("def nn(dataset):\n" +
-                        "    f=open('{}'.format(dataset),'r')\n" +
-                        "    data=f.readlines()[1:]\n" +
-                        "    temp=[]\n" +
+                out.getCode().setText("from google_drive_downloader import GoogleDriveDownloader as gdd\n" +
+                        "def downloadDataset(url,name):\n"+
+                        "\ttry:\n"+
+                        "\t\tid = url.split('=')[-1]\n"+
+                        "\t\tgdd.download_file_from_google_drive(file_id=id,dest_path='./data/{}.csv'.format(name))\n"+
+                        "\t\treturn True\n"+
+                        "\texcept Exception as e:\n"+
+                        "\t\treturn e\n"+
+                        "def nn(dataset):\n" +
+                        "\ttemp=  downloadDataset(url,name)\n"+
+                        "\tif temp!=True:\n"+
+                        "\t\treturn \n"+
+                        "\tf=open('{}'.format(dataset),'r')\n" +
+                        "\tdata=f.readlines()[1:]\n" +
+                        "\ttemp=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        temp.append(data[i].split(',')[:-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\ttemp.append(data[i].split(',')[:-1])\n" +
                         "\n" +
-                        "    X=np.array(temp)\n" +
-                        "    X = X.astype(np.float)\n" +
-                        "    Y=[]\n" +
+                        "\tX=np.array(temp)\n" +
+                        "\tX = X.astype(np.float)\n" +
+                        "\tY=[]\n" +
                         "\n" +
-                        "    for i in range(len(data)):\n" +
-                        "        Y.append(data[i].split(',')[-1])\n" +
+                        "\tfor i in range(len(data)):\n" +
+                        "\t\tY.append(data[i].split(',')[-1])\n" +
                         "\n" +
-                        "    clf=neural_network.MLPClassifier()\n" +
-                        "    clf.fit(X,Y)\n" +
-                        "    pred=clf.predict(X)\n" +
-                        "    cm=confusion_matrix(Y,pred)\n" +
+                        "\tclf=neural_network.MLPClassifier()\n" +
+                        "\tclf.fit(X,Y)\n" +
+                        "\tpred=clf.predict(X)\n" +
+                        "\tcm=confusion_matrix(Y,pred)\n" +
                         "\n" +
-                        "    tp=cm[0][0]\n" +
-                        "    fp=cm[0][1]\n" +
-                        "    fn=cm[1][0]\n" +
-                        "    tn=cm[1][1]\n" +
+                        "\ttp=cm[0][0]\n" +
+                        "\tfp=cm[0][1]\n" +
+                        "\tfn=cm[1][0]\n" +
+                        "\ttn=cm[1][1]\n" +
                         "\n" +
-                        "    accuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
-                        "    tnr=round(float(tn)/float(tn+fp),4)\n" +
-                        "    tpr=round(float(tp)/float(tp+fn),4)\n" +
+                        "\taccuracy=round(float(tp+tn)/float(tp+tn+fp+fn),4)\n" +
+                        "\ttnr=round(float(tn)/float(tn+fp),4)\n" +
+                        "\ttpr=round(float(tp)/float(tp+fn),4)\n" +
                         "\n" +
-                        "    return accuracy,tnr,tpr\n\n"+
+                        "\treturn accuracy,tnr,tpr\n" +
                         "if __name__ == '__main__':\n"+
-                        "    filename='data/iris.csv' \n"+
-                        "    accuracy, tnr, tpr = SVM('{}'.format(filename))\n"+
-                        "    print(accuracy, tnr , tpr)");
+                        "\tfilename='data/iris.csv' \n"+
+                        "\taccuracy, tnr, tpr = nn('{}'.format(filename))\n"+
+                        "\tprint(accuracy, tnr , tpr)\n");
                 break;
             case 5:
                  out.getCode().setText("Under Construction");

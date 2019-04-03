@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9deff674-8f38-4d38-ba24-0840f1a80a68" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Drioditor/app/src/main/res/layout/activity_edit_code.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Drioditor/app/src/main/res/layout/activity_edit_code.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Drioditor/app/src/main/res/layout/activity_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Drioditor/app/src/main/res/layout/activity_template.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snippets/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/snippets/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../web/Droiditor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../web/Droiditor/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
