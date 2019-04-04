@@ -1,4 +1,3 @@
-
 import numpy as np
 from sklearn import neighbors,svm,naive_bayes,neural_network
 from sklearn.metrics import confusion_matrix
@@ -10,7 +9,7 @@ def downloadDataset(url,name):
 		return True
 	except Exception as e:
 		return e
-def naive(dataset):
+def SVM(dataset):
 	temp=  downloadDataset('https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N','iris')
 	if temp!=True:
 		return 
@@ -28,7 +27,7 @@ def naive(dataset):
 	for i in range(len(data)):
 		Y.append(data[i].split(',')[-1])
 
-	clf=naive_bayes.GaussianNB()
+	clf=svm.LinearSVC()
 	clf.fit(X,Y)
 	pred=clf.predict(X)
 	cm=confusion_matrix(Y,pred)
@@ -45,4 +44,5 @@ def naive(dataset):
 	return accuracy,tnr,tpr
 if __name__ == '__main__':
 	filename='data/iris.csv' 
-	accuracy, tnr, tpr = naive('{}'.format(filename))
+	accuracy, tnr, tpr = SVM('{}'.format(filename))
+	print(accuracy, tnr , tpr)

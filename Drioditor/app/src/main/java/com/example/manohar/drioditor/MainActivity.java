@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
         iDrawerItems.add(new PrimaryDrawerItem().withName("Codes").withIcon(R.drawable.ic_code_black_24dp));
         iDrawerItems.add(new PrimaryDrawerItem().withName("ML Recommendation").withIcon(R.drawable.ic_code_black_24dp));
         iDrawerItems.add(new PrimaryDrawerItem().withName("ML Template").withIcon(R.drawable.ic_code_black_24dp));
-        iDrawerItems.add(new PrimaryDrawerItem().withName("PDF Reports").withIcon(R.drawable.ic_code_black_24dp));
 
         List<IDrawerItem> stickyItems=new ArrayList<>();
         SwitchDrawerItem switchDrawerItem=new SwitchDrawerItem()
@@ -375,7 +374,6 @@ public class MainActivity extends AppCompatActivity implements CodeEventListener
                 open_ml_template_activity();
                 break;
             case 5:
-                open_pdf_viewer_activity();
                 break;
             default:
                 break;
