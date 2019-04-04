@@ -156,7 +156,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def naive(dataset):\n" +
-                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
+                        "\ttemp=  downloadDataset("+"'"+values.getString("drive_url")+"'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -203,7 +203,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def knn(dataset):\n" +
-                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
+                        "\ttemp=  downloadDataset("+"'"+values.getString("drive_url")+"'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -252,7 +252,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def SVM(dataset):\n" +
-                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
+                        "\ttemp=  downloadDataset("+"'"+values.getString("drive_url")+"'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -299,7 +299,7 @@ public class template extends AppCompatActivity {
                         "\texcept Exception as e:\n"+
                         "\t\treturn e\n"+
                         "def nn(dataset):\n" +
-                        "\ttemp=  downloadDataset("+"'https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N'"+",'"+values.getString("dataset_name")+"')\n"+
+                        "\ttemp=  downloadDataset("+"'"+values.getString("drive_url")+"'"+",'"+values.getString("dataset_name")+"')\n"+
                         "\tif temp!=True:\n"+
                         "\t\treturn \n"+
                         "\tf=open('{}'.format(dataset),'r')\n" +
@@ -677,6 +677,7 @@ public class template extends AppCompatActivity {
                                 input_code.getCode().setText(out);
                                 input_code.getCode().setSelection(cursorPosition+temp.length());
                             }
+                            break;
 
                         case "save":
                             openFileNameDialog();
@@ -686,6 +687,87 @@ public class template extends AppCompatActivity {
 
                         case "run":
                             runCode();
+                            break;
+                        case "semicolon":
+                            temp=";";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+
+                        case "inverted":
+                            if (test[1].equalsIgnoreCase("comma")) {
+                                temp = "" + '"';
+                                for (int i = 0; i < cursorPosition; i++)
+                                    out += msg.charAt(i);
+                                out += temp;
+
+                                for (int i = cursorPosition; i < msg.length(); i++)
+                                    out += msg.charAt(i);
+                                Log.i("voice 1", out);
+                                input_code.getCode().setText(out);
+                                input_code.getCode().setSelection(cursorPosition + temp.length());
+                            }
+                            break;
+                        case "comma":
+                            temp=",";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+                        case "bracket":
+                            if (test[1].equalsIgnoreCase("open")){
+                                temp="(";}
+                            else{
+                                temp=")";
+                            }
+
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+
+                        case "tab":
+                            temp="\t";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+                        case "colon":
+                            temp=":";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
                             break;
                         default:
                             temp="";
