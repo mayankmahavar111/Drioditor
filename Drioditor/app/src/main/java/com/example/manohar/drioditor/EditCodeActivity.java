@@ -628,6 +628,7 @@ public class EditCodeActivity extends AppCompatActivity {
                                 input_code.getCode().setText(out);
                                 input_code.getCode().setSelection(cursorPosition+temp.length());
                         }
+                        break;
 
                         case "save":
                                 openFileNameDialog();
@@ -637,6 +638,87 @@ public class EditCodeActivity extends AppCompatActivity {
 
                         case "run":
                             runCode();
+                            break;
+                        case "semicolon":
+                            temp=";";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+
+                        case "inverted":
+                            if (test[1].equalsIgnoreCase("comma")) {
+                                temp = "" + '"';
+                                for (int i = 0; i < cursorPosition; i++)
+                                    out += msg.charAt(i);
+                                out += temp;
+
+                                for (int i = cursorPosition; i < msg.length(); i++)
+                                    out += msg.charAt(i);
+                                Log.i("voice 1", out);
+                                input_code.getCode().setText(out);
+                                input_code.getCode().setSelection(cursorPosition + temp.length());
+                            }
+                            break;
+                        case "comma":
+                            temp=",";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+                        case "bracket":
+                            if (test[1].equalsIgnoreCase("open")){
+                                temp="(";}
+                            else{
+                                temp=")";
+                            }
+
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+
+                        case "tab":
+                            temp="\t";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
+                            break;
+                        case "colon":
+                            temp=":";
+                            for(int i=0;i<cursorPosition;i++)
+                                out+=msg.charAt(i);
+                            out +=temp;
+
+                            for(int i=cursorPosition;i<msg.length();i++)
+                                out+=msg.charAt(i);
+                            Log.i("voice 1",out);
+                            input_code.getCode().setText(out);
+                            input_code.getCode().setSelection(cursorPosition+temp.length());
                             break;
                         default:
                             temp="";

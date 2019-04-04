@@ -25,7 +25,7 @@ import java.net.URL;
 
 public class ml_code extends Activity {
 
-    private EditText input_code;
+    private SyntaxView input_code;
 
 
 
@@ -144,7 +144,7 @@ public class ml_code extends Activity {
     }
     private void createMsg(final int random){
         input_code=findViewById(R.id.input_ml_code);
-        String msg= input_code.getText().toString();
+        String msg= input_code.getCode().getText().toString();
         if (msg.isEmpty() )
             Toast.makeText(ml_code.this, "Nothing to compile and run", Toast.LENGTH_SHORT).show();
         else{
@@ -156,8 +156,8 @@ public class ml_code extends Activity {
                     //Get Method
                     try {
 
-                        String msg= input_code.getText().toString();
-                        URL url = new URL("http://10.0.2.2:8000/recommendation/");
+                        String msg= input_code.getCode().getText().toString();
+                        URL url = new URL("http://192.168.43.6:8000/recommendation/");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                         conn.setRequestMethod("POST");
@@ -172,8 +172,9 @@ public class ml_code extends Activity {
                         jsonParam.put("code" , msg);
                         jsonParam.put("name" , values.getString("dataset_name"));
                         jsonParam.put("emailid",values.getString("report_gmail"));
-                        jsonParam.put("url" , "https://drive.google.com/open?id=0B4B1pQQ3lXI_bjNUdFQ1RWlzU01lUU9FN0V6SXhSWE1KTm1N");
+                        jsonParam.put("url" , values.getString("url"));
 
+                        Log.i("post ",values.getString("url"));
 
                         Log.i("JSON", jsonParam.toString());
                         DataOutputStream os = new DataOutputStream(conn.getOutputStream());
